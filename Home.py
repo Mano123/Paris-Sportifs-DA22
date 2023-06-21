@@ -13,55 +13,6 @@ st.write("BIENVENUE SUR LE SITE DE PARIS SPORTIFS")
 
 st.sidebar.success("Select a demo above.")
 
-df=pd.read_csv('atp_data.csv')
-
-# CONSTRUCTION DE LA VARIABLE CIBLE
-
-df['P2_proba_elo']=1-df['proba_elo']
-df['Result']=1
-
-df.rename({'Winner':'Player1','Loser':'Player2','WRank':'P1Rank','LRank':'P2Rank','Wsets':'P1sets',
-           'Lsets':'P2sets','PSW':'P1_PS','PSL':'P2_PS','B365W':'P1_B365','B365L':'P2_B365',
-           'elo_winner':'P1_elo','elo_loser':'P2_elo','proba_elo':'P1_proba_elo'},axis=1,inplace=True)
-
-def permut_player(row):
-  a=df.loc[row,'Player1']
-  b=df.loc[row,'Player2']
-
-  new_player=np.random.permutation([a,b])
-  
-
-  if new_player[0]!=a:
-    df.loc[row,'Result']=0
-    var_inter=df.loc[row,'Player1']
-    df.loc[row,'Player1']=df.loc[row,'Player2']
-    df.loc[row,'Player2']=var_inter
-    var_inter=df.loc[row,'P1Rank']
-    df.loc[row,'P1Rank']=df.loc[row,'P2Rank']
-    df.loc[row,'P2Rank']=var_inter
-    var_inter=df.loc[row,'P1sets']
-    df.loc[row,'P1sets']=df.loc[row,'P2sets']
-    df.loc[row,'P2sets']=var_inter
-    var_inter=df.loc[row,'P1_PS']
-    df.loc[row,'P1_PS']=df.loc[row,'P2_PS']
-    df.loc[row,'P2_PS']=var_inter
-    var_inter=df.loc[row,'P1_B365']
-    df.loc[row,'P1_B365']=df.loc[row,'P2_B365']
-    df.loc[row,'P2_B365']=var_inter
-    var_inter=df.loc[row,'P1_elo']
-    df.loc[row,'P1_elo']=df.loc[row,'P2_elo']
-    df.loc[row,'P2_elo']=var_inter
-    var_inter=df.loc[row,'P1_proba_elo']
-    df.loc[row,'P1_proba_elo']=df.loc[row,'P2_proba_elo']
-    df.loc[row,'P2_proba_elo']=var_inter
-
-  return None
-
-for row in df.index:
-  permut_player(row)
-
-df.to_csv('atp_after_construct.csv')
-
 df=pd.read_csv('atp_after_construct.csv')
 
 # NETTOYAGE DU DATASET
