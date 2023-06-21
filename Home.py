@@ -11,13 +11,9 @@ st.set_page_config(
 
 st.write("BIENVENUE SUR LE SITE DE PARIS SPORTIFS")
 
-st.sidebar.success("Select a demo above.")
-
 df=pd.read_csv('atp_after_construct.csv')
 
 # NETTOYAGE DU DATASET
-
-df.info()
 
 # Suppression des colonnes inutiles
 
@@ -43,15 +39,9 @@ df.loc[:,'P2_PS'][df.P2_PS.isna()]=df.loc[:,'P2_B365'][df.P2_PS.isna()]
 df.loc[:,'P1_B365'][df.P1_B365.isna()]=df.loc[:,'P1_PS'][df.P1_B365.isna()]
 df.loc[:,'P2_B365'][df.P2_B365.isna()]=df.loc[:,'P2_PS'][df.P2_B365.isna()]
 
-df.info()
-
-# On a un dataset sans valeurs manquantes
-
 # Gestion des doublons
 
 df.duplicated().sum()
-
-# Nous n'avons aucun doublons dans le dataset
 
 ## Gestion des données textuelles
 
