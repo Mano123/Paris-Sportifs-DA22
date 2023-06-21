@@ -122,3 +122,5 @@ tab18.plotly_chart(fig18, theme="streamlit", use_container_width=True)
 st.subheader('CORRELATION ENTRE LES COTES PS et B365')
 fig19=px.imshow(df[['P1_PS','P2_PS','P1_B365','P2_B365']].corr(),text_auto=True)
 st.plotly_chart(fig19, theme="streamlit", use_container_width=True)
+
+st.write(df.isna().sum())
