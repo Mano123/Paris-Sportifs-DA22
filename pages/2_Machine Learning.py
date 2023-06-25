@@ -81,7 +81,7 @@ forest.fit(X_train_scaled,y_train)
 
 # RESUME DES PERFORMANCES DES MODELES
 
-st.header('TABLEAU RECAPITULATF DES SCORES PAR MODELES')
+st.subheader('TABLEAU RECAPITULATIF DES SCORES PAR MODELES')
 
 performance=pd.DataFrame(
     {
