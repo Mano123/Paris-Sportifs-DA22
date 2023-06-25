@@ -112,8 +112,8 @@ if uploaded_file is not None:
 
     # Encodage variable numérique
 
-    feats_scaled=pd.DataFrame(scaler.fit_transform(feats.drop(['Player1','Player2'],axis=1)),columns=feats.drop(['Player1','Player2'],axis=1).columns)
-    df_test_scaled=pd.DataFrame(scaler.transform(df_test.drop(['Player1','Player2'],axis=1)),columns=df_test.drop(['Player1','Player2'],axis=1).columns)
+    feats_scaled=pd.DataFrame(scaler.fit_transform(feats.drop(['Date','Location','Tournament','Series','Court','Surface','Round','Player1','Player2'],axis=1)),columns=feats.drop(['Date','Location','Tournament','Series','Court','Surface','Round','Player1','Player2'],axis=1).columns)
+    df_test_scaled=pd.DataFrame(scaler.transform(df_test.drop(['Date','Location','Tournament','Series','Court','Surface','Round','Player1','Player2'],axis=1)),columns=df_test.drop(['Date','Location','Tournament','Series','Court','Surface','Round','Player1','Player2'],axis=1).columns)
 
     # Forêt aléatoire
     
