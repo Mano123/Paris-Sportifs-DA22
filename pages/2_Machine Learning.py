@@ -110,6 +110,18 @@ uploaded_file = st.file_uploader("Choisir un fichier")
 if uploaded_file is not None:
     df_test=pd.read_excel(uploaded_file)
 
+    # Encodage variable numérique
+
+    feats_scaled=pd.DataFrame(scaler.fit_transform(feats.drop(['Player1','Player2'],axis=1)),columns=feats.drop(['Player1','Player2'],axis=1).columns)
+    df_test_scaled=pd.DataFrame(scaler.transform(df_test.drop(['Player1','Player2'],axis=1)),columns=df_test.drop(['Player1','Player2'],axis=1).columns)
+
+    # Forêt aléatoire
+    
+    from sklearn.ensemble import RandomForestClassifier
+    
+    forest=RandomForestClassifier(n_estimators=800,max_depth=4,n_jobs=-1,random_state=0)
+    forest.fit(feats_scaled,target)
+
     # Simulation sur la cagnotte
 
     y_pred_proba=forest.predict_proba(df_test_scaled)
