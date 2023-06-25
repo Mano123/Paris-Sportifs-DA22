@@ -10,5 +10,3 @@ st.set_page_config(
 )
 
 st.write("BIENVENUE SUR LE SITE DE PARIS SPORTIFS")
-
-df=pd.read_csv('atp_after_construct.csv')
