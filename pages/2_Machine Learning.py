@@ -75,5 +75,5 @@ dataset_importance=pd.DataFrame({
     'Feature importance':forest.feature_importances_
 }).sort_values(by='Feature importance',ascending=False).head(20).reset_index(drop=True)
 
-fig=px.barh(dataset_importance,x='Feature Name',y='Feature importance')
+fig=px.bar(dataset_importance,x='Feature Name',y='Feature importance',orientation='h')
 st.write(fig)
