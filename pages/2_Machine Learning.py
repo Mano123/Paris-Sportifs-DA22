@@ -73,7 +73,7 @@ st.write('Score Forêt Aléatoire test : ',forest.score(X_test_scaled,y_test),'\
 dataset_importance=pd.DataFrame({
     'Feature Name':forest.feature_names_in_,
     'Feature importance':forest.feature_importances_
-}).sort_values(by='Feature importance',ascending=False).head(20)
+}).sort_values(by='Feature importance',ascending=False).head(20).reset_index(drop=True)
 
 #fig=px.bar(dataset_importance,x='Feature Name',y='Feature importance',orientaton='h')
 st.write(dataset_importance)
