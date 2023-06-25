@@ -110,8 +110,6 @@ uploaded_file = st.file_uploader("Choisir un fichier")
 if uploaded_file is not None:
     df_test=pd.read_excel(uploaded_file)
 
-    st.write(df_test)
-
     # Encodage variable numérique
 
     feats_scaled=pd.DataFrame(scaler.fit_transform(feats.drop(['Player1','Player2'],axis=1)),columns=feats.drop(['Player1','Player2'],axis=1).columns)
@@ -128,6 +126,8 @@ if uploaded_file is not None:
 
     y_pred_proba=forest.predict_proba(df_test_scaled)
     y_pred=forest.predict(df_test_scaled)
+
+    st.write(pd.concat([df_test,y_pred],axis=1))
     
     capital_depart=100
     surete=0.8
