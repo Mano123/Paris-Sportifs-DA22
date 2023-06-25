@@ -60,39 +60,28 @@ X_test_scaled=pd.concat([X_test_num_scaled,X_test_cat_scaled],axis=1)
 
 # Modèle Linéaire
 
-st.header('MODELE LINEAIRE')
-
 from sklearn.linear_model import LogisticRegression
 
 reglog=LogisticRegression(C=1,solver='lbfgs',max_iter=1000,random_state=0)
 reglog.fit(X_train_scaled,y_train)
-st.write('Score Regression Logistique Entrainement : ',reglog.score(X_train_scaled,y_train),'\n')
-st.write('Score Regression Logistique Test : ',reglog.score(X_test_scaled,y_test),'\n')
 
 # Arbre à décision
-
-st.header('ARBRE A DECISISON')
 
 from sklearn.tree import DecisionTreeClassifier
 
 dt=DecisionTreeClassifier(criterion='gini',max_depth=4,random_state=0)
 dt.fit(X_train_scaled,y_train)
-st.write('Score Arbre à Décision Entrainement : ',dt.score(X_train_scaled,y_train),'\n')
-st.write('Score Arbre à Décision test : ',dt.score(X_test_scaled,y_test),'\n')
 
 # Forêt aléatoire
-
-st.header('FORÊT ALEATOIRE')
 
 from sklearn.ensemble import RandomForestClassifier
 
 forest=RandomForestClassifier(n_estimators=800,max_depth=4,n_jobs=-1,random_state=0)
 forest.fit(X_train_scaled,y_train)
 
-st.write('Score Forêt Aléatoire Entrainement : ',forest.score(X_train_scaled,y_train),'\n')
-st.write('Score Forêt Aléatoire test : ',forest.score(X_test_scaled,y_test),'\n')
-
 # RESUME DES PERFORMANCES DES MODELES
+
+st.header('TABLEAU RECAPITULATF DES SCORES PAR MODELES')
 
 performance=pd.DataFrame(
     {
