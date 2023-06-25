@@ -67,3 +67,12 @@ forest.fit(X_train_scaled,y_train)
 
 st.write('Score Forêt Aléatoire Entrainement : ',forest.score(X_train_scaled,y_train),'\n')
 st.write('Score Forêt Aléatoire test : ',forest.score(X_test_scaled,y_test),'\n')
+
+# Importance des variables du dataset
+
+dataset_importance=pd.DataFrame({
+    'Feature Name':forest.feature_names_in_,
+    'Feature importance':forest.feature_importances_
+}).sort_values(by='Feature importance',ascending=False).head(20)
+
+plt.barh(dataset_importance['Feature Name'],dataset_importance['Feature importance']);
