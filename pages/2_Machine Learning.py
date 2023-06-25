@@ -11,7 +11,7 @@ st.title('MACHINE LEARNING')
 # STATISTIQUES ET VISUALISATIONS
 
 df=pd.read_csv('atp_after_cleaning.csv')
-df=df.drop(['Unnamed: 0','Comment'],axis=1)
+df=df.drop(['Unnamed: 0'],axis=1)
 df.Date=pd.to_datetime(df.Date)
 df=df.reset_index(drop=True)
 
