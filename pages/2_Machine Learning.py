@@ -109,4 +109,4 @@ st.subheader('SIMULATION')
 uploaded_file = st.file_uploader("Choisir un fichier")
 if uploaded_file is not None:
     df_test=pd.read_excel(uploaded_file)
-    st.write(df_trest)
+    st.write(df_test)
