@@ -103,3 +103,10 @@ dataset_importance=pd.DataFrame({
 
 fig=px.bar(dataset_importance,x='Feature importance',y='Feature Name',orientation='h')
 st.write(fig)
+
+st.write('SIMULATION')
+
+uploaded_file = st.file_uploader("Choisir un fichier")
+if uploaded_file is not None:
+    df_test=pd.read_excel('uploaded_file')
+    st.write(df_trest)
