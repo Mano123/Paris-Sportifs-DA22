@@ -58,6 +58,17 @@ X_test_cat_scaled=pd.DataFrame(oneh.transform(X_test_cat).toarray(),columns=oneh
 X_train_scaled=pd.concat([X_train_num_scaled,X_train_cat_scaled],axis=1)
 X_test_scaled=pd.concat([X_test_num_scaled,X_test_cat_scaled],axis=1)
 
+# Modèle Linéaire
+
+st.header('MODELE LINEAIRE')
+
+from sklearn.linear_model import LogisticRegression
+
+reglog=LogisticRegression(C=1,solver='lbfgs',max_iter=1000,random_state=0)
+reglog.fit(X_train_scaled,y_train)
+st.write('Score Regression Logistique Entrainement : ',reglog.score(X_train_scaled,y_train),'\n')
+st.write('Score Regression Logistique Test : ',reglog.score(X_test_scaled,y_test),'\n')
+
 # Forêt aléatoire
 
 st.header('FORÊT ALEATOIRE')
