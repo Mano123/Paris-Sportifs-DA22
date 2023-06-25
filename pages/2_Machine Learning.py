@@ -6,7 +6,7 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 
-st.title('MACHINE LEARNING')
+st.title('MACHINE LEARNING ET SIMULATION')
 
 # IMPLEMENTATION DU MODELE
 
