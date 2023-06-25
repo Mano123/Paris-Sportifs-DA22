@@ -92,6 +92,17 @@ forest.fit(X_train_scaled,y_train)
 st.write('Score Forêt Aléatoire Entrainement : ',forest.score(X_train_scaled,y_train),'\n')
 st.write('Score Forêt Aléatoire test : ',forest.score(X_test_scaled,y_test),'\n')
 
+# RESUME DES PERFORMANCES DES MODELES
+
+performance=pd.DataFrame(
+    {
+        'Score Entrainement':[reglog.score(X_train_scaled,y_train),dt.score(X_train_scaled,y_train),forest.score(X_train_scaled,y_train)],
+        'Score Test':[reglog.score(X_test_scaled,y_test),dt.score(X_test_scaled,y_test),forest.score(X_test_scaled,y_test)]
+    },index=['Modèle Linéaire','Arbre à décision','Forêt Aléatoire']
+)
+
+st.write(performance)
+
 # Importance des variables du dataset
 
 dataset_importance=pd.DataFrame({
