@@ -110,6 +110,8 @@ uploaded_file = st.file_uploader("Choisir un fichier")
 if uploaded_file is not None:
     df_test=pd.read_excel(uploaded_file)
 
+    st.write(df_test)
+
     # Encodage variable numérique
 
     feats_scaled=pd.DataFrame(scaler.fit_transform(feats.drop(['Player1','Player2'],axis=1)),columns=feats.drop(['Player1','Player2'],axis=1).columns)
