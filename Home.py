@@ -208,6 +208,6 @@ df['Ratio_proba']=df.P1_proba_elo/df.P2_proba_elo
 
 df=df.reset_index(drop=True)
 
-df.to_csv('atp_after_cleaning.csv')
+df.to_csv('https://github.com/Mano123/Paris-Sportifs-DA22/blob/main/atp_after_cleaning.csv')
 
 st.write(df)
