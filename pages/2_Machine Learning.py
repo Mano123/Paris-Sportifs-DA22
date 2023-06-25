@@ -69,6 +69,17 @@ reglog.fit(X_train_scaled,y_train)
 st.write('Score Regression Logistique Entrainement : ',reglog.score(X_train_scaled,y_train),'\n')
 st.write('Score Regression Logistique Test : ',reglog.score(X_test_scaled,y_test),'\n')
 
+# Arbre à décision
+
+st.header('ARBRE A DECISISON')
+
+from sklearn.tree import DecisionTreeClassifier
+
+dt=DecisionTreeClassifier(criterion='gini',max_depth=4,random_state=0)
+dt.fit(X_train_scaled,y_train)
+st.write('Score Arbre à Décision Entrainement : ',dt.score(X_train_scaled,y_train),'\n')
+st.write('Score Arbre à Décision test : ',dt.score(X_test_scaled,y_test),'\n')
+
 # Forêt aléatoire
 
 st.header('FORÊT ALEATOIRE')
