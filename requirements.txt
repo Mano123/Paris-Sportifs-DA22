@@ -4,4 +4,4 @@ numpy
 openpyxl
 seaborn
 plotly.express
-sklearn
+scikit-learn
