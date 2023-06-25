@@ -94,6 +94,8 @@ st.write(performance)
 
 # Importance des variables du dataset
 
+st.subheader('SELECTION DES CRITERES DE PERFORMANCES DU MODELE FORÊT ALEATOIRE')
+
 dataset_importance=pd.DataFrame({
     'Feature Name':forest.feature_names_in_,
     'Feature importance':forest.feature_importances_
