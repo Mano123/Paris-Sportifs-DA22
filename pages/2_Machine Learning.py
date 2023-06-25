@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 
 st.title('MACHINE LEARNING')
 
-# STATISTIQUES ET VISUALISATIONS
+# IMPLEMENTATION DU MODELE
 
 df=pd.read_csv('atp_after_cleaning.csv')
 df=df.drop(['Unnamed: 0'],axis=1)
@@ -59,6 +59,8 @@ X_train_scaled=pd.concat([X_train_num_scaled,X_train_cat_scaled],axis=1)
 X_test_scaled=pd.concat([X_test_num_scaled,X_test_cat_scaled],axis=1)
 
 # Forêt aléatoire
+
+st.header('FORÊT ALEATOIRE')
 
 from sklearn.ensemble import RandomForestClassifier
 
