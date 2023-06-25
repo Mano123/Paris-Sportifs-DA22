@@ -127,7 +127,7 @@ if uploaded_file is not None:
     y_pred_proba=forest.predict_proba(df_test_scaled)
     y_pred=forest.predict(df_test_scaled)
 
-    st.write(pd.concat([df_test,y_pred],axis=1))
+    st.write(pd.concat([df_test,pd.Serie(y_pred)],axis=1))
     
     capital_depart=100
     surete=0.8
