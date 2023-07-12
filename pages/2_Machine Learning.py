@@ -167,8 +167,6 @@ if uploaded_file is not None:
             
         df_filtre=df_pred[(df_pred.Location==location) & (df_pred.Tournament==tournament)]    
 
-            
-    
-    #st.write(df_filtre)
+        st.write(df_filtre)
     
         
