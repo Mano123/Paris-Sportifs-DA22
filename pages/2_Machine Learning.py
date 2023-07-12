@@ -162,7 +162,13 @@ if uploaded_file is not None:
             left, right = st.columns((1, 20))
             left.write("↳")
             # Treat columns with < 10 unique values as categorical
-            st.write(is_categorical_dtype(df_pred[column]))
+            user_text_input = right.text_input(
+                f"Substring or regex in {column}",
+            )
+            if user_text_input:
+                df_pred = df_pred[df[column].str.contains(user_text_input)]
+
+            
     
     st.write(df_pred)
     
