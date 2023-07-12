@@ -124,8 +124,8 @@ if uploaded_file is not None:
 
     # Prediction de la variable cible du jeu de données de la saison 2019
 
-    y_pred_proba=forest_optimise.predict_proba(df_test_scaled)
-    y_pred=forest_optimise.predict(df_test_scaled)
+    y_pred_proba=forest.predict_proba(df_test_scaled)
+    y_pred=forest.predict(df_test_scaled)
 
     # Construction Dataframe des données prédites
     df_pred=pd.concat([df_test,pd.Series(y_pred)],axis=1)
