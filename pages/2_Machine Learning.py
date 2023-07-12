@@ -171,7 +171,7 @@ if uploaded_file is not None:
 
         #st.write(df_filtre)
         st.write('Tournoi de '+tournament)
-        st.write('Date du tournoi : '+date)
+        st.write('Date du tournoi : '+date.strftime('%Y-%m-%d'))
         st.write('Joueur 1 : '+player1)
         st.write('Joueur 2 : '+player2)
         st.write('Niveau du Tournoi : '+round)
