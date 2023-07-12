@@ -51,8 +51,8 @@ def filter_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         to_filter_columns = st.multiselect("Filter dataframe on", df.columns)
         for column in to_filter_columns:
             left, right = st.columns((1, 20))
-            #left.write("↳")
-            
+            left.write("↳")
+        to_filter_columns
     return df
 
 
