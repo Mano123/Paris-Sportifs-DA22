@@ -170,13 +170,7 @@ if uploaded_file is not None:
                 )
                 df_pred = df_pred[df_pred[column].isin(location_input)] 
 
-            elif column=='Tournament':
-                tournament_input = right.multiselect(
-                    f"Values for {column}",
-                    df_pred[column].unique(),
-                    default=list(df_pred[column].unique()),
-                )
-                df_pred = df_pred[df_pred[column].isin(tournament_input)] 
+            
             
 
             
