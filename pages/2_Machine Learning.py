@@ -162,7 +162,7 @@ if uploaded_file is not None:
     modification_container = st.container()
 
     with modification_container:
-        to_filter_columns = st.multiselect("Filter dataframe on", df.columns)
+        to_filter_columns = st.multiselect("Filter dataframe on", df_pred.columns)
         for column in to_filter_columns:
             left, right = st.columns((1, 20))
             left.write("↳")
