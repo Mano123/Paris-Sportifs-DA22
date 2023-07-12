@@ -162,13 +162,7 @@ if uploaded_file is not None:
             left, right = st.columns((1, 20))
             left.write("↳")
             # Treat columns with < 10 unique values as categorical
-            if is_categorical_dtype(df_pred[column]):
-                user_cat_input = right.multiselect(
-                    f"Values for {column}",
-                    df_pred[column].unique(),
-                    default=list(df_pred[column].unique()),
-                )
-                df_pred = df_pred[df_pred[column].isin(user_cat_input)]
+            st.write(type(df_pred[column))
     
     st.write(df_pred)
     
