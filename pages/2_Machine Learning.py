@@ -162,7 +162,7 @@ if uploaded_file is not None:
             left, right = st.columns((1, 20))
             left.write("↳")
             # Treat columns with < 10 unique values as categorical
-            st.write(type(df_pred[column))
+            st.write(type(df_pred[column]))
     
     st.write(df_pred)
     
