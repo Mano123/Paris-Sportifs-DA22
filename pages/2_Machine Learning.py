@@ -122,12 +122,33 @@ if uploaded_file is not None:
     forest=RandomForestClassifier(n_estimators=1000,max_depth=4,n_jobs=-1,random_state=0)
     forest.fit(feats_scaled,target)
 
+    # Prediction de la variable cible du jeu de données de la saison 2019
+
+    y_pred_proba=forest_optimise.predict_proba(df_test_scaled)
+    y_pred=forest_optimise.predict(df_test_scaled)
+
+    # Construction Dataframe des données prédites
+    df_pred=pd.concat([df_test,pd.Series(y_pred)],axis=1)
+    df_pred=df_pred.rename(columns={0:'Result'})
+    
+    for row in df_pred.index:
+      if df_pred.loc[row,'Result']==0:
+        var_echange=df_pred.loc[row,'Player1']
+        df_pred.loc[row,'Player1']=df_pred.loc[row,'Player2']
+        df_pred.loc[row,'Player2']=var_echange
+        var_echange=df_pred.loc[row,'P1Rank']
+        df_pred.loc[row,'P1Rank']=df_pred.loc[row,'P2Rank']
+        df_pred.loc[row,'P2Rank']=var_echange
+        var_echange=df_pred.loc[row,'P1_PS']
+        df_pred.loc[row,'P1_PS']=df_pred.loc[row,'P2_PS']
+        df_pred.loc[row,'P2_PS']=var_echange
+        var_echange=df_pred.loc[row,'P1_B365']
+        df_pred.loc[row,'P1_B365']=df_pred.loc[row,'P2_B365']
+        df_pred.loc[row,'P2_B365']=var_echange
+
+    st.write(df_pred)
+
     # Simulation sur la cagnotte
-
-    y_pred_proba=forest.predict_proba(df_test_scaled)
-    y_pred=forest.predict(df_test_scaled)
-
-    st.write(pd.concat([df_test,pd.Series(y_pred)],axis=1))
     
     capital_depart=100
     surete=0.8
