@@ -157,7 +157,7 @@ if uploaded_file is not None:
     modification_container = st.container()
 
     with modification_container:
-        columns = st.selectbox("Location", df_pred.Location)
+        columns = st.selectbox("Location", df_pred.Location.unique())
         
 
             
