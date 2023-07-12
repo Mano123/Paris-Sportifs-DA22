@@ -155,10 +155,10 @@ if uploaded_file is not None:
     modify = st.checkbox("Add filters")
 
     if not modify:
-        return df_pred
+        st.write(df_pred)
 
     df_pred = df_pred.copy()
         
-    
+    st.write(df_pred)
     
         
