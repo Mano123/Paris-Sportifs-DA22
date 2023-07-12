@@ -164,7 +164,7 @@ if uploaded_file is not None:
         round = st.selectbox("Round", df_pred[df_pred.Location==location].Round.unique())
         #player1 = st.selectbox("Player 1", df_pred[df_pred.Location==location & df_pred.Round==round].Player1.unique())
         #player2 = st.selectbox("Player 2", df_pred[df_pred.Location==location & df_pred.Round==round].Player2.unique())
-        st.write(df_pred[df_pred.Location==location & df_pred.Round==round].Player1.unique())
+        st.write(df_pred[(df_pred.Location==location) & (df_pred.Round==round)].Player1.unique())
             
             
 
