@@ -154,32 +154,12 @@ if uploaded_file is not None:
 
     st.title("Auto Filter Dataframes in Streamlit")
     
+    modify = st.checkbox("Selectionnez pour filtrer")
+
+    if not modify:
+        retunr df_pred
+
+    df_pred=df_pred.copy()
+
     
-    def filter_dataframe(df):
-        """
-        Adds a UI on top of a dataframe to let viewers filter columns
-    
-        Args:
-            df (pd.DataFrame): Original dataframe
-    
-        Returns:
-            pd.DataFrame: Filtered dataframe
-        """
-        modify = st.checkbox("Add filters")
-    
-        if not modify:
-            return df
-    
-        df = df.copy()
-    
-        modification_container = st.container()
-    
-        with modification_container:
-            to_filter_columns = st.multiselect("Filter dataframe on", df.columns)
-            for column in to_filter_columns:
-                left, right = st.columns((1, 20))
-                left.write("↳")
-                
-        return df
-    
-    st.dataframe(filter_dataframe(df_pred))
+        
