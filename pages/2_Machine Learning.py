@@ -165,7 +165,7 @@ if uploaded_file is not None:
         player1 = st.selectbox("Player 1", df_pred[(df_pred.Location==location) & (df_pred.Round==round)].Player1.unique())
         player2 = st.selectbox("Player 2", df_pred[(df_pred.Location==location) & (df_pred.Round==round) & (df_pred.Player1==player1)].Player2.unique())
             
-        df_filtre=df_pred[(df_pred.Location==location) & (df_pred.Tournament==tournament)]    
+        df_filtre=df_pred[(df_pred.Location==location) & (df_pred.Tournament==tournament) & (df_pred.Series==serie) & (df_pred.Court==court) & (df_pred.Round==round) & (df_pred.Player1==player1) & (df_pred.Player2==player2)]    
 
         st.write(df_filtre)
     
