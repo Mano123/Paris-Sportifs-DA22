@@ -179,41 +179,7 @@ if uploaded_file is not None:
             for column in to_filter_columns:
                 left, right = st.columns((1, 20))
                 left.write("↳")
-            # Treat columns with < 10 unique values as categorical
-                if is_categorical_dtype(df[column]) or df[column].nunique() < 10:
-                    user_cat_input = right.multiselect(
-                        f"Values for {column}",
-                        df[column].unique(),
-                        default=list(df[column].unique()),
-                    )
-                    df = df[df[column].isin(user_cat_input)]
-                    
+                
         return df
     
     st.dataframe(filter_dataframe(df_pred))
-    
-
-    # Simulation sur la cagnotte
-    
-    capital_depart=100
-    surete=0.8
-    
-    cagnotte=0
-    
-    for i,probas in enumerate(y_pred_proba):
-    
-      cote_player1=df_test[['P1_PS','P1_B365']].loc[i]
-      cote_player2=df_test[['P2_PS','P2_B365']].loc[i]
-    
-      if probas[0]<surete:
-        st.write('Miser {}€ sur le joueur 2 {} -'.format(round(capital_depart*probas[0]),df_test.Player2.loc[i]),'sur {}, avec une cote à {} -'.format(cote_player2.idxmax(), cote_player2.max()),'nous ferait perdre {}€'.format(round(capital_depart*probas[0])))
-      elif probas[0]>surete:
-        st.write('Miser {}€ sur le joueur 2 {} -'.format(round(capital_depart*probas[0]),df_test.Player2.loc[i]),'sur {}, avec une cote à {} -'.format(cote_player2.idxmax(), cote_player2.max()),'nous ferait gagner {}€'.format(round(capital_depart*probas[0]*cote_player2.max())))
-        cagnotte+=round(capital_depart*probas[0]*cote_player2.max())
-      elif probas[1]<surete:
-        st.write('Miser {}€ sur le joueur 1 {} -'.format(round(capital_depart*probas[1]),df_test.Player2.loc[i]),'sur {}, avec une cote à {} -'.format(cote_player1.idxmax(), cote_player1.max()),'nous ferait perdre {}€'.format(round(capital_depart*probas[1])))
-      elif probas[1]>surete:
-        st.write('Miser {}€ sur le joueur 1 {} -'.format(round(capital_depart*probas[1]),df_test.Player2.loc[i]),'sur {}, avec une cote à {} -'.format(cote_player1.idxmax(), cote_player1.max()),'nous ferait gagner {}€'.format(round(capital_depart*probas[1]*cote_player1.max())))
-        cagnotte+=round(capital_depart*probas[0]*cote_player2.max())
-    
-    st.write('Nous finissons la saison avec une cagnotte de {}€'.format(round(cagnotte)))
