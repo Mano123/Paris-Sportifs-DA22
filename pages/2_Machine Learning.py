@@ -158,7 +158,17 @@ if uploaded_file is not None:
         st.write(df_pred)
 
     df_pred = df_pred.copy()
-        
+
+    modification_container = st.container()
+
+    with modification_container:
+        to_filter_columns = st.multiselect("Filter dataframe on", df.columns)
+        for column in to_filter_columns:
+            left, right = st.columns((1, 20))
+            left.write("↳")
+
+    
+    
     st.write(df_pred)
     
         
