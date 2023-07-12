@@ -157,7 +157,7 @@ if uploaded_file is not None:
     modification_container = st.container()
 
     with modification_container:
-        date = st.selectbox("Date",df_pred['Date']=pd.to_datetime(df_pred['Date']))
+        date = st.selectbox("Date",df_pred.Date=pd.to_datetime(df_pred.Date))
         location = st.selectbox("Location", df_pred.Location.unique())
         tournament = st.selectbox("Tournament", df_pred[df_pred.Location==location].Tournament.unique())
         serie = st.selectbox("Series", df_pred[df_pred.Location==location].Series.unique())
