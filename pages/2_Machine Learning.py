@@ -170,5 +170,6 @@ if uploaded_file is not None:
         df_filtre=df_pred[(df_pred.Location==location) & (df_pred.Tournament==tournament) & (df_pred.Series==serie) & (df_pred.Court==court) & (df_pred.Round==round) & (df_pred.Player1==player1) & (df_pred.Player2==player2)]    
 
         st.write(df_filtre)
+        st.write('Npm du Tournoi : '+tournament)
     
         
