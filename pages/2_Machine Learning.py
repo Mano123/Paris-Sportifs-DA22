@@ -168,7 +168,7 @@ if uploaded_file is not None:
                     df_pred[column].unique(),
                     default=list(df_pred[column].unique()),
                 )
-                #df_pred = df_pred[df_pred[column].isin(user_cat_input)]
+                df_pred = df_pred[df_pred[column].isin(user_cat_input)]
     
     st.write(df_pred)
     
