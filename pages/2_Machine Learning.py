@@ -154,9 +154,14 @@ if uploaded_file is not None:
 
     def filter_dataframe(df):
     
-    modify = st.checkbox("Add filters")
+        modify = st.checkbox("Add filters")
 
-    return df
+        if not modify:
+            return df
+
+        df = df.copy()
+        
+        return df
 
 st.dataframe(filter_dataframe(df_pred))
 
