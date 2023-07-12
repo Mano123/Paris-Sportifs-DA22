@@ -163,7 +163,7 @@ if uploaded_file is not None:
         court = st.selectbox("Court", df_pred.Court.unique())
         round = st.selectbox("Round", df_pred.Round.unique())
         player1 = st.selectbox("Player 1", df_pred.Round.unique())
-        player2 = st.selectbox("Player 1", df_pred.Round.unique())
+        player2 = st.selectbox("Player 2", df_pred.Round.unique())
             
             
 
