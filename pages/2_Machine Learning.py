@@ -157,7 +157,7 @@ if uploaded_file is not None:
     modify = st.checkbox("Selectionnez pour filtrer")
 
     if not modify:
-        retunr df_pred
+        return df_pred
 
     df_pred=df_pred.copy()
 
