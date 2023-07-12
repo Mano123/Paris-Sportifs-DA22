@@ -17,7 +17,7 @@ df=df.reset_index(drop=True)
 
 # Suppression des colonnes inutiles
 
-df=df.drop(['Location','Date','Round','Best of','Comment','P1sets','P2sets','Tournament','Cat_Player1','Cat_Player2','Series','Court','Surface','P1_elo','P2_elo','P1_proba_elo','P2_proba_elo','Ratio_proba','Ratio_PS','Ratio_B365'],axis=1)
+df=df.drop(['P1sets','P2sets','Best of','Date','Comment','Ratio_proba','Ratio_PS','Ratio_B365','P1_elo','P2_elo','P1_proba_elo','P2_proba_elo'],axis=1)
 
 # Variables explicatives
 feats=df.drop('Result',axis=1)
@@ -76,7 +76,7 @@ dt.fit(X_train_scaled,y_train)
 
 from sklearn.ensemble import RandomForestClassifier
 
-forest=RandomForestClassifier(n_estimators=800,max_depth=4,n_jobs=-1,random_state=0)
+forest=RandomForestClassifier(n_estimators=1000,max_depth=4,n_jobs=-1,random_state=0)
 forest.fit(X_train_scaled,y_train)
 
 # RESUME DES PERFORMANCES DES MODELES
@@ -112,14 +112,14 @@ if uploaded_file is not None:
 
     # Encodage variable numérique
 
-    feats_scaled=pd.DataFrame(scaler.fit_transform(feats.drop(['Player1','Player2'],axis=1)),columns=feats.drop(['Player1','Player2'],axis=1).columns)
+    feats_scaled=pd.DataFrame(scaler.fit_transform(feats.drop(['Location','Tournament','Series','Court','Surface','Round','Player1','Player2','Cat_Player1','Cat_Player2'],axis=1)),columns=feats.drop(['Location','Tournament','Series','Court','Surface','Round','Player1','Player2','Cat_Player1','Cat_Player2'],axis=1).columns)
     df_test_scaled=pd.DataFrame(scaler.transform(df_test.drop(['Date','Location','Tournament','Series','Court','Surface','Round','Player1','Player2'],axis=1)),columns=df_test.drop(['Date','Location','Tournament','Series','Court','Surface','Round','Player1','Player2'],axis=1).columns)
 
     # Forêt aléatoire
     
     from sklearn.ensemble import RandomForestClassifier
     
-    forest=RandomForestClassifier(n_estimators=800,max_depth=4,n_jobs=-1,random_state=0)
+    forest=RandomForestClassifier(n_estimators=1000,max_depth=4,n_jobs=-1,random_state=0)
     forest.fit(feats_scaled,target)
 
     # Simulation sur la cagnotte
