@@ -152,14 +152,26 @@ if uploaded_file is not None:
         df_pred.loc[row,'P1_B365']=df_pred.loc[row,'P2_B365']
         df_pred.loc[row,'P2_B365']=var_echange
 
-    st.title("Auto Filter Dataframes in Streamlit")
-    
-    modify = st.checkbox("Selectionnez pour filtrer")
+    def filter_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Adds a UI on top of a dataframe to let viewers filter columns
+
+    Args:
+        df (pd.DataFrame): Original dataframe
+
+    Returns:
+        pd.DataFrame: Filtered dataframe
+    """
+    modify = st.checkbox("Add filters")
 
     if not modify:
-        return df_pred
+        return df
 
-    df_pred=df_pred.copy()
+    df = df.copy()
+
+    return df
+
+st.dataframe(filter_dataframe(df_pred))
 
     
         
