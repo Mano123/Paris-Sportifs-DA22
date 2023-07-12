@@ -154,9 +154,6 @@ if uploaded_file is not None:
     
     modify = st.checkbox("Add filters")
 
-    if not modify:
-        st.write(df_pred)
-
     df_pred = df_pred.copy()
 
     modification_container = st.container()
