@@ -176,9 +176,6 @@ if uploaded_file is not None:
         st.write('Joueur 2 : '+player2)
         st.write('Niveau du Tournoi : '+round)
 
-        if df_filtre.Result==1:
-            st.write('Le joueur '+player1+' a plus de chance de gagner ce match par rapport au joueur '+player2)
-        else:
-            st.write('Le joueur '+player2+' a plus de chance de gagner ce match par rapport au joueur '+player1)
+        
     
         
