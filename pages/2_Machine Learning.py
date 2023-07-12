@@ -162,11 +162,14 @@ if uploaded_file is not None:
             left, right = st.columns((1, 20))
             left.write("↳")
             # Treat columns with < 10 unique values as categorical
-            user_text_input = right.text_input(
-                f"Substring or regex in {column}",
-            )
-            if user_text_input:
-                df_pred = df_pred[df[column].str.contains(user_text_input)]
+            if column=='Location':
+                location_input = right.multiselect(
+                    f"Values for {column}",
+                    df_pred[column].unique(),
+                    default=list(df_pred[column].unique()),
+                )
+                df_pred = df_pred[df_pred[column].isin(location_input)] 
+            
 
             
     
