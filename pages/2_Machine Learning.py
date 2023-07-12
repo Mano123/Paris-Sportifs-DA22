@@ -152,7 +152,7 @@ if uploaded_file is not None:
         df_pred.loc[row,'P1_B365']=df_pred.loc[row,'P2_B365']
         df_pred.loc[row,'P2_B365']=var_echange
 
-    def filter_dataframe(df):
+    def filter_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     
         modify = st.checkbox("Add filters")
 
