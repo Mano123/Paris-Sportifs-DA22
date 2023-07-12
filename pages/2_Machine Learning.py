@@ -157,18 +157,8 @@ if uploaded_file is not None:
     modification_container = st.container()
 
     with modification_container:
-        to_filter_columns = st.multiselect("Filter dataframe on", df_pred.columns)
-        for column in to_filter_columns:
-            left, right = st.columns((1, 20))
-            left.write("↳")
-            # Treat columns with < 10 unique values as categorical
-            if column=='Location':
-                location_input = right.multiselect(
-                    f"Values for {column}",
-                    df_pred[column].unique(),
-                    default=list(df_pred[column].unique()),
-                )
-                df_pred = df_pred[df_pred[column].isin(location_input)] 
+        columns = st.selectbox("Location", df_pred.columns)
+        
 
             
             
