@@ -164,7 +164,7 @@ if uploaded_file is not None:
         round = st.selectbox("Round", df_pred[df_pred.Location==location].Round.unique())
         player1 = st.selectbox("Player 1", df_pred[(df_pred.Location==location) & (df_pred.Round==round)].Player1.unique())
         player2 = st.selectbox("Player 2", df_pred[(df_pred.Location==location) & (df_pred.Round==round) & (df_pred.Player1==player1)].Player2.unique())
-        date = st.selectbox("Date",pd.to_datetime(df_pred.Date))
+        date = st.selectbox("Date",pd.to_datetime(df_pred.Date,format="%d/%m/%Y"))
             
         df_filtre=df_pred[(df_pred.Location==location) & (df_pred.Tournament==tournament) & (df_pred.Series==serie) & (df_pred.Court==court) & (df_pred.Round==round) & (df_pred.Player1==player1) & (df_pred.Player2==player2)]    
 
