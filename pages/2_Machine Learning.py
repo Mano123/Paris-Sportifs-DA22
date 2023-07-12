@@ -169,6 +169,14 @@ if uploaded_file is not None:
                     default=list(df_pred[column].unique()),
                 )
                 df_pred = df_pred[df_pred[column].isin(location_input)] 
+
+            elif column=='Date':
+                date_input = right.multiselect(
+                    f"Values for {column}",
+                    df_pred[column].unique(),
+                    default=list(df_pred[column].unique()),
+                )
+                df_pred = df_pred[df_pred[column].isin(date_input)] 
             
 
             
