@@ -170,6 +170,15 @@ if uploaded_file is not None:
         df_filtre=df_pred[(df_pred.Location==location) & (df_pred.Tournament==tournament) & (df_pred.Series==serie) & (df_pred.Court==court) & (df_pred.Round==round) & (df_pred.Player1==player1) & (df_pred.Player2==player2)]    
 
         st.write(df_filtre)
-        st.write('Npm du Tournoi : '+tournament)
+        st.write('Tournoi de '+tournament)
+        st.write('Date du tournoi : '+date)
+        st.write('Joueur 1 : '+player1)
+        st.write('Joueur 2 : '+player2)
+        st.write('Niveau du Tournoi : '+round)
+
+        if df_filtre.Result==1:
+            st.write('Le joueur '+player1+' a plus de chance de gagner ce match par rapport au joueur '+player2)
+        else:
+            st.write('Le joueur '+player2+' a plus de chance de gagner ce match par rapport au joueur '+player1)
     
         
