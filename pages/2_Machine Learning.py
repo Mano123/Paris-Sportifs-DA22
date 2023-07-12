@@ -165,8 +165,8 @@ if uploaded_file is not None:
             if is_categorical_dtype(df_pred[column]):
                 user_cat_input = right.multiselect(
                     f"Values for {column}",
-                    df[column].unique(),
-                    default=list(df[column].unique()),
+                    df_pred[column].unique(),
+                    default=list(df_pred[column].unique()),
                 )
                 df_pred = df_pred[df_pred[column].isin(user_cat_input)]
     
