@@ -155,7 +155,7 @@ if uploaded_file is not None:
     st.title("Auto Filter Dataframes in Streamlit")
     
     
-    def filter_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+    def filter_dataframe(df):
         """
         Adds a UI on top of a dataframe to let viewers filter columns
     
@@ -171,17 +171,6 @@ if uploaded_file is not None:
             return df
     
         df = df.copy()
-    
-        # Try to convert datetimes into a standard format (datetime, no timezone)
-        for col in df.columns:
-            if is_object_dtype(df[col]):
-                try:
-                    df[col] = pd.to_datetime(df[col])
-                except Exception:
-                    pass
-    
-            if is_datetime64_any_dtype(df[col]):
-                df[col] = df[col].dt.tz_localize(None)
     
         modification_container = st.container()
     
@@ -210,18 +199,7 @@ if uploaded_file is not None:
                         step=step,
                     )
                     df = df[df[column].between(*user_num_input)]
-                elif is_datetime64_any_dtype(df[column]):
-                    user_date_input = right.date_input(
-                        f"Values for {column}",
-                        value=(
-                            df[column].min(),
-                            df[column].max(),
-                        ),
-                    )
-                    if len(user_date_input) == 2:
-                        user_date_input = tuple(map(pd.to_datetime, user_date_input))
-                        start_date, end_date = user_date_input
-                        df = df.loc[df[column].between(start_date, end_date)]
+
                 else:
                     user_text_input = right.text_input(
                         f"Substring or regex in {column}",
