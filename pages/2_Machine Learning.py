@@ -159,7 +159,7 @@ if uploaded_file is not None:
     with modification_container:
         location = st.selectbox("Location", df_pred.Location.unique())
         date = st.selectbox("Date",pd.to_datetime(df_pred.Date[df_pred.Location==location]).unique())
-        tournament = st.selectbox("Tournament", df_pred[df_pred.Location==location].Tournament.unique())
+        tournament = st.selectbox("Tournament", df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Tournament.unique())
         serie = st.selectbox("Series", df_pred[df_pred.Location==location].Series.unique())
         court = st.selectbox("Court", df_pred[df_pred.Location==location].Court.unique())
         round = st.selectbox("Round", df_pred[df_pred.Location==location].Round.unique())
