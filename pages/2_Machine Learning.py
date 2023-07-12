@@ -157,14 +157,18 @@ if uploaded_file is not None:
     modification_container = st.container()
 
     with modification_container:
-        columns = st.selectbox("Location", df_pred.Location.unique())
-        
-
+        location = st.selectbox("Location", df_pred.Location.unique())
+        tournament = st.selectbox("Tournament", df_pred.Tournament.unique())
+        serie = st.selectbox("Series", df_pred.Series.unique())
+        court = st.selectbox("Court", df_pred.Court.unique())
+        round = st.selectbox("Round", df_pred.Round.unique())
+        player1 = st.selectbox("Player 1", df_pred.Round.unique())
+        player2 = st.selectbox("Player 1", df_pred.Round.unique())
             
             
 
             
     
-    st.write(df_pred)
+    #st.write(df_pred)
     
         
