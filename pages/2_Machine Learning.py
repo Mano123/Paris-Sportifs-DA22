@@ -168,7 +168,7 @@ if uploaded_file is not None:
         elif df_filtre.Result.values==1 and ecart<30:
             st.write("Ce paris est trop risqué, il vaut mieux s'en abstenir")
         elif df_filtre.Result.values==0 and ecart>30:
-            st.write(Le joueur '+player2+' a plus de chance de gagner ce match par rapport au joueur '+player1)
+            st.write('Le joueur '+player2+' a plus de chance de gagner ce match par rapport au joueur '+player1)
         elif df_filtre.Result.values==0 and ecart<30:
             st.write("Ce paris est trop risqué, il vaut mieux s'en abstenir")
     
