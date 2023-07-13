@@ -161,6 +161,9 @@ if uploaded_file is not None:
         st.write('Probabilité que le Joueur 2 gagne : '+str(df_filtre['Proba 0'].values[0]*100))
         st.write('Niveau du Tournoi : '+round)
 
+        ecart=(df_filtre['Proba 1'].values[0]*100)-(df_filtre['Proba 0'].values[0]*100)
+        st.write(ecart)
+
         if df_filtre.Result.values==1:
             st.write('Le joueur '+player1+' a plus de chance de gagner ce match par rapport au joueur '+player2)
         else:
