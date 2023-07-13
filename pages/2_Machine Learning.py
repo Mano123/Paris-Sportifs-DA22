@@ -137,23 +137,6 @@ if uploaded_file is not None:
     df_pred=pd.concat([df_test,pd.Series(y_pred)],axis=1)
     df_pred=df_pred.rename(columns={0:'Result'})
     
-    for row in df_pred.index:
-      if df_pred.loc[row,'Result']==0:
-        var_echange=df_pred.loc[row,'Player1']
-        df_pred.loc[row,'Player1']=df_pred.loc[row,'Player2']
-        df_pred.loc[row,'Player2']=var_echange
-        var_echange=df_pred.loc[row,'P1Rank']
-        df_pred.loc[row,'P1Rank']=df_pred.loc[row,'P2Rank']
-        df_pred.loc[row,'P2Rank']=var_echange
-        var_echange=df_pred.loc[row,'P1_PS']
-        df_pred.loc[row,'P1_PS']=df_pred.loc[row,'P2_PS']
-        df_pred.loc[row,'P2_PS']=var_echange
-        var_echange=df_pred.loc[row,'P1_B365']
-        df_pred.loc[row,'P1_B365']=df_pred.loc[row,'P2_B365']
-        df_pred.loc[row,'P2_B365']=var_echange
-    
-
-
     modification_container = st.container()
 
     with modification_container:
