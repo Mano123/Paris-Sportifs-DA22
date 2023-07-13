@@ -140,14 +140,14 @@ if uploaded_file is not None:
     modification_container = st.container()
 
     with modification_container:
-        location = st.selectbox("Location", df_pred.Location.unique())
+        location = st.selectbox("Location", sorted(df_pred.Location.unique()))
         date = st.selectbox("Date",pd.to_datetime(df_pred.Date[df_pred.Location==location]).unique())
-        tournament = st.selectbox("Tournament", df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Tournament.unique())
-        serie = st.selectbox("Series", df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Series.unique())
-        court = st.selectbox("Court", df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Court.unique())
+        tournament = st.selectbox("Tournament", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Tournament.unique()))
+        serie = st.selectbox("Series", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Series.unique()))
+        court = st.selectbox("Court", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Court.unique()))
         round = st.selectbox("Round", df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Round.unique())
-        player1 = st.selectbox("Player 1", df_pred[(df_pred.Location==location) & (df_pred.Date==date) & (df_pred.Round==round)].Player1.unique())
-        player2 = st.selectbox("Player 2", df_pred[(df_pred.Location==location) & (df_pred.Date==date) & (df_pred.Round==round) & (df_pred.Player1==player1)].Player2.unique())
+        player1 = st.selectbox("Player 1", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date) & (df_pred.Round==round)].Player1.unique()))
+        player2 = st.selectbox("Player 2", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date) & (df_pred.Round==round) & (df_pred.Player1==player1)].Player2.unique()))
         
             
         df_filtre=df_pred[(df_pred.Location==location) & (df_pred.Tournament==tournament) & (df_pred.Series==serie) & (df_pred.Court==court) & (df_pred.Round==round) & (df_pred.Player1==player1) & (df_pred.Player2==player2)]    
