@@ -163,13 +163,13 @@ if uploaded_file is not None:
 
         ecart=np.abs((df_filtre['Proba 1'].values[0]*100)-(df_filtre['Proba 0'].values[0]*100))
 
-        if df_filtre.Result.values==1 and ecart>25:
+        if df_filtre.Result.values==1 and ecart>20:
             st.write('Le joueur '+player1+' a plus de chance de gagner ce match par rapport au joueur '+player2)
-        elif df_filtre.Result.values==1 and ecart<25:
+        elif df_filtre.Result.values==1 and ecart<20:
             st.write("Ce paris est trop risqué, il vaut mieux s'en abstenir")
-        elif df_filtre.Result.values==0 and ecart>25:
+        elif df_filtre.Result.values==0 and ecart>20:
             st.write('Le joueur '+player2+' a plus de chance de gagner ce match par rapport au joueur '+player1)
-        elif df_filtre.Result.values==0 and ecart<25:
+        elif df_filtre.Result.values==0 and ecart<20:
             st.write("Ce paris est trop risqué, il vaut mieux s'en abstenir")
     
         
