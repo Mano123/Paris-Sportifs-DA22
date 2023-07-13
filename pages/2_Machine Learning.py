@@ -134,8 +134,8 @@ if uploaded_file is not None:
     y_pred=forest.predict(df_test_scaled)
 
     # Construction Dataframe des données prédites
-    df_pred=pd.concat([df_test,pd.Series(y_pred)],axis=1)
-    df_pred=df_pred.rename(columns={0:'Result'})
+    df_pred=pd.concat([df_test,pd.Series(y_pred),pd.Series(y_pred_proba[0]),pd.Series(y_pred_proba[1])],axis=1)
+    df_pred=df_pred.rename(columns={0:'Result',1:'Proba 0',2:'Proba 1'})
     
     modification_container = st.container()
 
@@ -152,7 +152,7 @@ if uploaded_file is not None:
             
         df_filtre=df_pred[(df_pred.Location==location) & (df_pred.Tournament==tournament) & (df_pred.Series==serie) & (df_pred.Court==court) & (df_pred.Round==round) & (df_pred.Player1==player1) & (df_pred.Player2==player2)]    
 
-        #st.write(df_filtre)
+        st.write(df_filtre)
         st.write('Tournoi de '+tournament)
         st.write('Date du tournoi : '+date.strftime('%d-%m-%Y'))
         st.write('Joueur 1 : '+player1)
