@@ -134,7 +134,7 @@ if uploaded_file is not None:
     y_pred=forest.predict(df_test_scaled)
 
     # Construction Dataframe des données prédites
-    df_pred=pd.concat([df_test,pd.Series(y_pred),pd.Series(y_pred_proba[0]),pd.Series(y_pred_proba[1])],axis=1)
+    df_pred=pd.concat([df_test,pd.Series(y_pred),pd.DataFrame(y_pred_proba,columns=['Proba 0','Proba 1'])['Proba 0'],pd.DataFrame(y_pred_proba,columns=['Proba 0','Proba 1'])['Proba 1']],axis=1)
     df_pred=df_pred.rename(columns={0:'Result',1:'Proba 0',2:'Proba 1'})
     
     modification_container = st.container()
