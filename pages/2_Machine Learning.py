@@ -180,5 +180,5 @@ if uploaded_file is not None:
 
         capital_actuel=capital_actuel+gain
 
-        st.write('Votre capital actuel est de ',capital_actuel)
+        st.write('Votre capital actuel est de '+capital_actuel)
         
