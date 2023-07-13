@@ -161,12 +161,15 @@ if uploaded_file is not None:
         st.write('Probabilité que le Joueur 2 gagne : '+str(df_filtre['Proba 0'].values[0]*100))
         st.write('Niveau du Tournoi : '+round)
 
-        ecart=(df_filtre['Proba 1'].values[0]*100)-(df_filtre['Proba 0'].values[0]*100)
-        st.write(np.abs(ecart))
+        ecart=np.abs((df_filtre['Proba 1'].values[0]*100)-(df_filtre['Proba 0'].values[0]*100))
 
-        if df_filtre.Result.values==1:
+        if df_filtre.Result.values==1 and ecart>30:
             st.write('Le joueur '+player1+' a plus de chance de gagner ce match par rapport au joueur '+player2)
-        else:
+        elif df_filtre.Result.values==1 and ecart<30:
+            st.write('Ce paris est trop risqué, il vaut mieux s'en abstenir')
+        elif df_filtre.Result.values==0 and ecart>30:
             st.write('Le joueur '+player2+' a plus de chance de gagner ce match par rapport au joueur '+player1)
+        elif df_filtre.Result.values==0 and ecart<30:
+            st.write('Ce paris est trop risqué, il vaut mieux s'en abstenir')
     
         
