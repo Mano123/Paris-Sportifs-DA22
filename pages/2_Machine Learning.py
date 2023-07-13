@@ -170,7 +170,7 @@ if uploaded_file is not None:
         if df_filtre.Result.values==1 and ecart>20:
             mise=capital_actuel*(1-df_filtre['Proba 1'].values[0])
             gain=mise*(1-df_filtre['P1_PS'].values[0])
-            st.write('Le joueur '+player1+' a plus de chance de gagner ce match par rapport au joueur '+player2+'\n'+'Miser '+mise+' euros sur le joueur '+player1+' pour gagner '+gain+' euros')
+            st.write('Le joueur '+player1+' a plus de chance de gagner ce match par rapport au joueur '+player2+'\n'+'Miser '+str(mise)+' euros sur le joueur '+player1+' pour gagner '+str(gain)+' euros')
         elif df_filtre.Result.values==1 and ecart<20:
             st.write("Ce paris est trop risqué, il vaut mieux s'en abstenir")
         elif df_filtre.Result.values==0 and ecart>20:
