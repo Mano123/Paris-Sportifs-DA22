@@ -156,6 +156,7 @@ if uploaded_file is not None:
         st.write('Tournoi de '+tournament)
         st.write('Date du tournoi : '+date.strftime('%d-%m-%Y'))
         st.write('Joueur 1 : '+player1)
+        st.write('Probabilité quele Joueur 1 gagne : '+df_filtre['Proba 1'])
         st.write('Joueur 2 : '+player2)
         st.write('Niveau du Tournoi : '+round)
 
