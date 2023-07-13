@@ -176,6 +176,6 @@ if uploaded_file is not None:
         st.write('Joueur 2 : '+player2)
         st.write('Niveau du Tournoi : '+round)
 
-        st.write(df_filtre.Result)
+        st.write(df_filtre.Result.values)
     
         
