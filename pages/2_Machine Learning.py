@@ -191,4 +191,4 @@ if uploaded_file is not None:
             gain=mise*(df_filtre['P2_PS'].values[0]-1)
             gains.append(gain)
             st.write("Ce paris est trop risqué, mais vous pouvez si vous le souhaitez miser {0:.2f} euros sur le joueur ".format(mise),player2," pour envisager un gain de {0:.2f} euros".format(gain))
-st.write(gains)
+        st.write(gains)
