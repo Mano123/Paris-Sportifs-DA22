@@ -152,7 +152,6 @@ if uploaded_file is not None:
             
         df_filtre=df_pred[(df_pred.Location==location) & (df_pred.Tournament==tournament) & (df_pred.Series==serie) & (df_pred.Court==court) & (df_pred.Round==round) & (df_pred.Player1==player1) & (df_pred.Player2==player2)]    
 
-        capital_depart = st.slider('Capital de départ', 0, 10000, step=50)
         st.write('Tournoi de '+tournament)
         st.write('Date du tournoi : '+date.strftime('%d-%m-%Y'))
         st.write('Joueur 1 : '+player1)
@@ -163,6 +162,7 @@ if uploaded_file is not None:
 
         ecart=np.abs((df_filtre['Proba 1'].values[0]*100)-(df_filtre['Proba 0'].values[0]*100))
 
+        capital_depart = st.number_input('Insert a number')
         gain=0
         capital_actuel=capital_depart+gain
 
