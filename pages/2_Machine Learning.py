@@ -203,15 +203,14 @@ if uploaded_file is not None:
             mises=mises.append(mise)
             gains=gains.append(gain)
 
-            invest=pd.DataFrame(
-                {
-                    'Date':date_investissement,
-                    'Tournoi':tournois,
-                    'Match':matchs,
-                    'Mise':mises,
-                    'Gain':gains
-                }
-            )
+            date_investissement_serie=pd.Series(date_investissement)
+            tournois_serie=pd.Series(tournois)
+            matchs_serie=pd.Series(matchs)
+            mises_serie=pd.Series(mises)
+            gains_serie=pd.Series(gains)
+
+            invest=pd.concat([date_investissement_serie,tournois_serie,matchs_serie,mises_serie,gains_serie],axis=1)
+            invest=invest.rename(columns={0:'Date',1:'Tournois',2:'Match',3:'Mise',4:'Gains'})
             st.write(invest)
         else:
             st.write('Cliquez sur Ajouter pour faire vos paris')
