@@ -112,6 +112,8 @@ st.write(fig)
 
 st.subheader('SIMULATION')
 
+capital_depart = st.number_input('Capital de départ')
+
 uploaded_file = st.file_uploader("Choisir un fichier")
 if uploaded_file is not None:
     df_test=pd.read_excel(uploaded_file)
@@ -161,8 +163,7 @@ if uploaded_file is not None:
         st.write('Niveau du Tournoi : '+round)
 
         ecart=np.abs((df_filtre['Proba 1'].values[0]*100)-(df_filtre['Proba 0'].values[0]*100))
-
-        capital_depart = st.number_input('Capital de départ')
+        
         gain=0
         capital_actuel=capital_depart+gain
 
