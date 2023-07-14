@@ -196,13 +196,13 @@ if uploaded_file is not None:
         gains=[]
         
         if st.button('AJOUTER'):
-            st.write("Plan d'investissement")
-            date_investissement=date_investissement.append(date.strftime('%d-%m-%Y'))
-            tournois=tournois.append(tournament)
-            matchs=matchs.append(player1+' VS '+player2)
-            mises=mises.append(mise)
-            gains=gains.append(gain)
-        st.write(mises)
+            #st.write("Plan d'investissement")
+            #date_investissement=date_investissement.append(date.strftime('%d-%m-%Y'))
+            #tournois=tournois.append(tournament)
+            matchs=matchs.append(df_filtre['Player1']+' VS '+df_filtre['Player2'])
+            #mises=mises.append(mise)
+            #gains=gains.append(gain)
+        st.write(matchs)
         #else:
             #st.write('Cliquez sur Ajouter pour faire vos paris')
 
