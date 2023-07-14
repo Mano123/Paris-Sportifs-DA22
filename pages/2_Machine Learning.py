@@ -163,7 +163,6 @@ if uploaded_file is not None:
 
         ecart=np.abs((df_filtre['Proba 1'].values[0]*100)-(df_filtre['Proba 0'].values[0]*100))
 
-        capital_depart=100
         gain=0
         capital_actuel=capital_depart+gain
 
