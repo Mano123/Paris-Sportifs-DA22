@@ -167,8 +167,8 @@ if uploaded_file is not None:
         capital_actuel=capital_depart+gain
 
         if df_filtre.Result.values==1 and ecart>20:
-            mise=round(capital_actuel*(1-df_filtre['Proba 1'].values[0]))
-            gain=round(mise*(df_filtre['P1_PS'].values[0]-1))
+            mise=capital_actuel*(1-df_filtre['Proba 1'].values[0])
+            gain=mise*(df_filtre['P1_PS'].values[0]-1)
             st.write('Le joueur ',player1,' a plus de chance de gagner ce match par rapport au joueur ',player2)
             st.write('Miser {0:.2f}'.format(mise),' euros sur le joueur ',player1,' pour gagner {0:.2f}'.format(gain),' euros')
         elif df_filtre.Result.values==1 and ecart<20:
