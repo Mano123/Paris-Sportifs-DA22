@@ -201,8 +201,8 @@ if uploaded_file is not None:
 
             matchs=matchs.append(df_filtre['Player1']+' VS '+df_filtre['Player2'])
             st.write(matchs)
-        else:
-            st.write('Cliquez sur Ajouter pour faire vos paris')
+    else:
+        st.write('Cliquez sur Ajouter pour faire vos paris')
 
         #date_investissement_serie=pd.Series(date_investissement)
         #tournois_serie=pd.Series(tournois)
