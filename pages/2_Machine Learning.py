@@ -199,7 +199,7 @@ if uploaded_file is not None:
             st.write("Plan d'investissement")
             date_investissement=date_investissement.append(date.strftime('%d-%m-%Y'))
             tournois=tournois.append(tournament)
-            matchs=matchs.append(player1,' VS ',player2)
+            matchs=matchs.append(player1+' VS '+player2)
             mises=mises.append(mise)
             gains=gains.append(gain)
 
