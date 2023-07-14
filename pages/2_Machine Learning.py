@@ -212,6 +212,7 @@ if uploaded_file is not None:
                     'Gain':gains
                 }
             )
+            st.write(invest)
         else:
             st.write('Cliquez sur Ajouter pour faire vos paris')
                 
