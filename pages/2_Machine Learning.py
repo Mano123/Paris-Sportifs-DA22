@@ -188,4 +188,30 @@ if uploaded_file is not None:
         capital_actuel=capital_actuel+gain
 
         st.write('Votre capital actuel est de {0:.2f}'.format(capital_actuel))
+
+        date_investissement=[]
+        tournois=[]
+        matchs=[]
+        mises=[]
+        gains=[]
         
+        if st.button('AJOUTER'):
+            st.write("Plan d'investissement")
+            date_investissement=date_investissement.append(date.strftime('%d-%m-%Y'))
+            tournois=tournois.append(tournament)
+            matchs=matchs.append(player1,' VS ',player2)
+            mises=mises.append(mise)
+            gains=gains.append(gain)
+
+            invest=pd.DataFrame(
+                {
+                    'Date':date_investissement,
+                    'Tournoi':tournois,
+                    'Match':matchs,
+                    'Mise':mises,
+                    'Gain':gains
+                }
+            )
+        else:
+            st.write('Cliquez sur Ajouter pour faire vos paris')
+                
