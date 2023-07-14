@@ -139,6 +139,8 @@ if uploaded_file is not None:
     df_pred=pd.concat([df_test,pd.Series(y_pred),pd.DataFrame(y_pred_proba,columns=['Proba 0','Proba 1'])['Proba 0'],pd.DataFrame(y_pred_proba,columns=['Proba 0','Proba 1'])['Proba 1']],axis=1)
     df_pred=df_pred.rename(columns={0:'Result',1:'Proba 0',2:'Proba 1'})
 
+    test=[]
+
     modification_container = st.container()
 
     with modification_container:
@@ -185,7 +187,7 @@ if uploaded_file is not None:
             gain=mise*(df_filtre['P2_PS'].values[0]-1)
             st.write("Ce paris est trop risqué, mais vous pouvez si vous le souhaitez miser {0:.2f} euros sur le joueur ".format(mise),player2," pour envisager un gain de {0:.2f} euros".format(gain))
 
-        test=[]
+        
         
         if st.button('Ajouter'):
             test.append(gain)
