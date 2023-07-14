@@ -155,14 +155,14 @@ if uploaded_file is not None:
         st.write('Tournoi de ',tournament)
         st.write('Date du tournoi : ',date.strftime('%d-%m-%Y'))
         st.write('Joueur 1 : ',player1)
-        st.write('Probabilité que le Joueur 1 gagne : {}'.format(df_filtre['Proba 1'].values[0]*100))
+        st.write('Probabilité que le Joueur 1 gagne : {}'.format(round(df_filtre['Proba 1'].values[0]*100)))
         st.write('Joueur 2 : ',player2)
         st.write('Probabilité que le Joueur 2 gagne : '+str(df_filtre['Proba 0'].values[0]*100))
         st.write('Niveau du Tournoi : '+round)
 
         ecart=np.abs((df_filtre['Proba 1'].values[0]*100)-(df_filtre['Proba 0'].values[0]*100))
 
-        capital_depart = st.number_input('Insert a number')
+        capital_depart = st.number_input('Capital de départ')
         gain=0
         capital_actuel=capital_depart+gain
 
