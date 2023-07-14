@@ -188,5 +188,5 @@ if uploaded_file is not None:
         test=[]
         
         if st.button('Ajouter'):
-            test.append('A')
+            test.append('gain')
         st.write(test)
