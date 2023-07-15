@@ -163,7 +163,7 @@ if uploaded_file is not None:
         st.write('Probabilité que le Joueur 1 gagne Bookmakers : {0:.2f}'.format((1/df_filtre['P1_PS'].values[0])*100),' %')
         st.write('Joueur 2 : ',player2)
         st.write('Probabilité que le Joueur 2 gagne : {0:.2f}'.format(df_filtre['Proba 0'].values[0]*100),' %')
-        st.write('Probabilité que le Joueur 1 gagne Bookmakers : {0:.2f}'.format((1/df_filtre['P2_PS'].values[0])*100),' %')
+        st.write('Probabilité que le Joueur 2 gagne Bookmakers : {0:.2f}'.format((1/df_filtre['P2_PS'].values[0])*100),' %')
         st.write('Niveau du Tournoi : '+round)
     
         ecart=np.abs((df_filtre['Proba 1'].values[0]*100)-(df_filtre['Proba 0'].values[0]*100))
