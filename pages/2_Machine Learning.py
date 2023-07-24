@@ -16,74 +16,53 @@ st.title('MACHINE LEARNING ET SIMULATION')
 
 # IMPLEMENTATION DU MODELE
 
-# Fonction de chargement du dataset nettoyé
-
-@st.cache_data
-def load_dataset_clean(dataset_name):
-
-    df=pd.read_csv(dataset_name)
-    df=df.drop(['Unnamed: 0'],axis=1)
-    df.Date=pd.to_datetime(df.Date)
-    df=df.reset_index(drop=True)
+df=pd.read_csv(dataset_name)
+df=df.drop(['Unnamed: 0'],axis=1)
+df.Date=pd.to_datetime(df.Date)
+df=df.reset_index(drop=True)
     
-    # Suppression des colonnes inutiles
+# Suppression des colonnes inutiles
     
-    df=df.drop(['P1sets','P2sets','Best of','Date','Comment','Ratio_proba','Ratio_PS','Ratio_B365','P1_elo','P2_elo','P1_proba_elo','P2_proba_elo'],axis=1)
+df=df.drop(['P1sets','P2sets','Best of','Date','Comment','Ratio_proba','Ratio_PS','Ratio_B365','P1_elo','P2_elo','P1_proba_elo','P2_proba_elo'],axis=1)
+
+# Variables explicatives
+feats=df.drop('Result',axis=1)
     
-    return df
-
-df=load_dataset_clean('atp_after_cleaning.csv')
-
-# Fonction de separation variable explicative et variable cible
-
-@st.cache_data
-def transform_feats_target(df):
-    # Variables explicatives
-    feats=df.drop('Result',axis=1)
-    
-    # Variable cible
-    target=df.Result
-    return feats,target
-
-feats,target=transform_feats_target(df)
+# Variable cible
+target=df.Result
 
 from sklearn.model_selection import train_test_split
 
-# Fonction Preprocessing
+X_train,X_test,y_train,y_test=train_test_split(feats,target,test_size=0.2,random_state=0)
 
-@st.cache_data
-def transform_preprocessing(feats,target):
-    X_train,X_test,y_train,y_test=train_test_split(feats,target,test_size=0.2,random_state=0)
-
-    # Separation en variable numérique et Catégorielle de test et d'entrainement
+# Separation en variable numérique et Catégorielle de test et d'entrainement
     
-    X_train_num=X_train.select_dtypes(include=['int','float'])
-    X_test_num=X_test.select_dtypes(include=['int','float'])
-    X_train_cat=X_train.select_dtypes(include='O')
-    X_test_cat=X_test.select_dtypes(include='O')
+X_train_num=X_train.select_dtypes(include=['int','float'])
+X_test_num=X_test.select_dtypes(include=['int','float'])
+X_train_cat=X_train.select_dtypes(include='O')
+X_test_cat=X_test.select_dtypes(include='O')
     
-    # Normalisation des données numériques
+# Normalisation des données numériques
     
-    from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler
     
-    scaler=StandardScaler()
-    X_train_num_scaled=pd.DataFrame(scaler.fit_transform(X_train_num),columns=X_train_num.columns)
-    X_test_num_scaled=pd.DataFrame(scaler.transform(X_test_num),columns=X_test_num.columns)
-    #y_test = y_test.reset_index(drop=True)
+scaler=StandardScaler()
+X_train_num_scaled=pd.DataFrame(scaler.fit_transform(X_train_num),columns=X_train_num.columns)
+X_test_num_scaled=pd.DataFrame(scaler.transform(X_test_num),columns=X_test_num.columns)
+#y_test = y_test.reset_index(drop=True)
     
-    # Encodage variable catégorielle
+# Encodage variable catégorielle
     
-    from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder
     
-    oneh=OneHotEncoder(handle_unknown='ignore')
-    X_train_cat_scaled=pd.DataFrame(oneh.fit_transform(X_train_cat).toarray(),columns=oneh.get_feature_names_out())
-    X_test_cat_scaled=pd.DataFrame(oneh.transform(X_test_cat).toarray(),columns=oneh.get_feature_names_out())
+oneh=OneHotEncoder(handle_unknown='ignore')
+X_train_cat_scaled=pd.DataFrame(oneh.fit_transform(X_train_cat).toarray(),columns=oneh.get_feature_names_out())
+X_test_cat_scaled=pd.DataFrame(oneh.transform(X_test_cat).toarray(),columns=oneh.get_feature_names_out())
     
-    # Fusion Données enccodées
+# Fusion Données enccodées
     
-    X_train_scaled=pd.concat([X_train_num_scaled,X_train_cat_scaled],axis=1)
-    X_test_scaled=pd.concat([X_test_num_scaled,X_test_cat_scaled],axis=1)
-    return X_train_scaled,y_train,X_test_scaled,y_test
+X_train_scaled=pd.concat([X_train_num_scaled,X_train_cat_scaled],axis=1)
+X_test_scaled=pd.concat([X_test_num_scaled,X_test_cat_scaled],axis=1)
 
 X_train_scaled,y_train,X_test_scaled,y_test=transform_preprocessing(feats,target)
 
