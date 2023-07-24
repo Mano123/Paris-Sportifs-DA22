@@ -16,14 +16,23 @@ st.title('MACHINE LEARNING ET SIMULATION')
 
 # IMPLEMENTATION DU MODELE
 
-df=pd.read_csv('atp_after_cleaning.csv')
-df=df.drop(['Unnamed: 0'],axis=1)
-df.Date=pd.to_datetime(df.Date)
-df=df.reset_index(drop=True)
+# Fonction de chargement du dataset nettoyé
 
-# Suppression des colonnes inutiles
+@st.cache_data
+def load_dataset_clean(dataset_name):
 
-df=df.drop(['P1sets','P2sets','Best of','Date','Comment','Ratio_proba','Ratio_PS','Ratio_B365','P1_elo','P2_elo','P1_proba_elo','P2_proba_elo'],axis=1)
+    df=pd.read_csv(dataset_name)
+    df=df.drop(['Unnamed: 0'],axis=1)
+    df.Date=pd.to_datetime(df.Date)
+    df=df.reset_index(drop=True)
+    
+    # Suppression des colonnes inutiles
+    
+    df=df.drop(['P1sets','P2sets','Best of','Date','Comment','Ratio_proba','Ratio_PS','Ratio_B365','P1_elo','P2_elo','P1_proba_elo','P2_proba_elo'],axis=1)
+    
+    return df
+
+df=load_dataset_clean('atp_after_cleaning.csv')
 
 # Variables explicatives
 feats=df.drop('Result',axis=1)
