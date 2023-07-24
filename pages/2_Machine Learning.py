@@ -64,8 +64,6 @@ X_test_cat_scaled=pd.DataFrame(oneh.transform(X_test_cat).toarray(),columns=oneh
 X_train_scaled=pd.concat([X_train_num_scaled,X_train_cat_scaled],axis=1)
 X_test_scaled=pd.concat([X_test_num_scaled,X_test_cat_scaled],axis=1)
 
-X_train_scaled,y_train,X_test_scaled,y_test=transform_preprocessing(feats,target)
-
 # Modèle Linéaire
 
 from sklearn.linear_model import LogisticRegression
