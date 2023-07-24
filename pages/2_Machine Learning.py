@@ -36,6 +36,7 @@ df=load_dataset_clean('atp_after_cleaning.csv')
 
 # Fonction de separation variable explicative et variable cible
 
+@st.cache_data
 def transform_feats_target(df):
     # Variables explicatives
     feats=df.drop('Result',axis=1)
