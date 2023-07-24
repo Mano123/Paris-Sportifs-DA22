@@ -148,7 +148,6 @@ if uploaded_file is not None:
         date = st.selectbox("Date",pd.to_datetime(df_pred.Date[df_pred.Location==location]).unique())
         tournament = st.selectbox("Tournament", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Tournament.unique()))
         serie = st.selectbox("Series", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Series.unique()))
-        court = st.selectbox("Court", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Court.unique()))
         round = st.selectbox("Round", df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Round.unique())
         player1 = st.selectbox("Player 1", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date) & (df_pred.Round==round)].Player1.unique()))
         player2 = st.selectbox("Player 2", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date) & (df_pred.Round==round) & (df_pred.Player1==player1)].Player2.unique()))
@@ -160,10 +159,8 @@ if uploaded_file is not None:
         st.write('Date du tournoi : ',date.strftime('%d-%m-%Y'))
         st.write('Joueur 1 : ',player1)
         st.write('Probabilité que le Joueur 1 gagne : {0:.2f}'.format(df_filtre['Proba 1'].values[0]*100),' %')
-        #st.write('Probabilité que le Joueur 1 gagne Bookmakers : {0:.2f}'.format((1/df_filtre['P1_PS'].values[0])*100),' %')
         st.write('Joueur 2 : ',player2)
         st.write('Probabilité que le Joueur 2 gagne : {0:.2f}'.format(df_filtre['Proba 0'].values[0]*100),' %')
-        #st.write('Probabilité que le Joueur 2 gagne Bookmakers : {0:.2f}'.format((1/df_filtre['P2_PS'].values[0])*100),' %')
         st.write('Niveau du Tournoi : '+round)
     
         ecart=np.abs((df_filtre['Proba 1'].values[0]*100)-(df_filtre['Proba 0'].values[0]*100))
