@@ -49,36 +49,43 @@ feats,target=transform_feats_target(df)
 
 from sklearn.model_selection import train_test_split
 
-X_train,X_test,y_train,y_test=train_test_split(feats,target,test_size=0.2,random_state=0)
+# Fonction Preprocessing
 
-# Separation en variable numérique et Catégorielle de test et d'entrainement
+@st.cache_data
+def transform_preprocessing(feats,target):
+    X_train,X_test,y_train,y_test=train_test_split(feats,target,test_size=0.2,random_state=0)
 
-X_train_num=X_train.select_dtypes(include=['int','float'])
-X_test_num=X_test.select_dtypes(include=['int','float'])
-X_train_cat=X_train.select_dtypes(include='O')
-X_test_cat=X_test.select_dtypes(include='O')
+    # Separation en variable numérique et Catégorielle de test et d'entrainement
+    
+    X_train_num=X_train.select_dtypes(include=['int','float'])
+    X_test_num=X_test.select_dtypes(include=['int','float'])
+    X_train_cat=X_train.select_dtypes(include='O')
+    X_test_cat=X_test.select_dtypes(include='O')
+    
+    # Normalisation des données numériques
+    
+    from sklearn.preprocessing import StandardScaler
+    
+    scaler=StandardScaler()
+    X_train_num_scaled=pd.DataFrame(scaler.fit_transform(X_train_num),columns=X_train_num.columns)
+    X_test_num_scaled=pd.DataFrame(scaler.transform(X_test_num),columns=X_test_num.columns)
+    #y_test = y_test.reset_index(drop=True)
+    
+    # Encodage variable catégorielle
+    
+    from sklearn.preprocessing import OneHotEncoder
+    
+    oneh=OneHotEncoder(handle_unknown='ignore')
+    X_train_cat_scaled=pd.DataFrame(oneh.fit_transform(X_train_cat).toarray(),columns=oneh.get_feature_names_out())
+    X_test_cat_scaled=pd.DataFrame(oneh.transform(X_test_cat).toarray(),columns=oneh.get_feature_names_out())
+    
+    # Fusion Données enccodées
+    
+    X_train_scaled=pd.concat([X_train_num_scaled,X_train_cat_scaled],axis=1)
+    X_test_scaled=pd.concat([X_test_num_scaled,X_test_cat_scaled],axis=1)
+    return X_train_scaled,y_train,X_test_scaled,y_test
 
-# Normalisation des données numériques
-
-from sklearn.preprocessing import StandardScaler
-
-scaler=StandardScaler()
-X_train_num_scaled=pd.DataFrame(scaler.fit_transform(X_train_num),columns=X_train_num.columns)
-X_test_num_scaled=pd.DataFrame(scaler.transform(X_test_num),columns=X_test_num.columns)
-#y_test = y_test.reset_index(drop=True)
-
-# Encodage variable catégorielle
-
-from sklearn.preprocessing import OneHotEncoder
-
-oneh=OneHotEncoder(handle_unknown='ignore')
-X_train_cat_scaled=pd.DataFrame(oneh.fit_transform(X_train_cat).toarray(),columns=oneh.get_feature_names_out())
-X_test_cat_scaled=pd.DataFrame(oneh.transform(X_test_cat).toarray(),columns=oneh.get_feature_names_out())
-
-# Fusion Données enccodées
-
-X_train_scaled=pd.concat([X_train_num_scaled,X_train_cat_scaled],axis=1)
-X_test_scaled=pd.concat([X_test_num_scaled,X_test_cat_scaled],axis=1)
+X_train_scaled,y_train,X_test_scaled,y_test=transform_preprocessing(feats,target)
 
 # Modèle Linéaire
 
