@@ -16,7 +16,7 @@ st.title('MACHINE LEARNING ET SIMULATION')
 
 # IMPLEMENTATION DU MODELE
 
-df=pd.read_csv(dataset_name)
+df=pd.read_csv('atp_after_cleaning.csv')
 df=df.drop(['Unnamed: 0'],axis=1)
 df.Date=pd.to_datetime(df.Date)
 df=df.reset_index(drop=True)
