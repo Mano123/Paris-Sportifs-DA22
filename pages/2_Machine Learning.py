@@ -34,11 +34,17 @@ def load_dataset_clean(dataset_name):
 
 df=load_dataset_clean('atp_after_cleaning.csv')
 
-# Variables explicatives
-feats=df.drop('Result',axis=1)
+# Fonction de separation variable explicative et variable cible
 
-# Variable cible
-target=df.Result
+def transform_feats_target(df):
+    # Variables explicatives
+    feats=df.drop('Result',axis=1)
+    
+    # Variable cible
+    target=df.Result
+    return feats,target
+
+feats,target=transform_feats_target(df)
 
 from sklearn.model_selection import train_test_split
 
