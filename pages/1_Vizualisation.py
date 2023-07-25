@@ -59,7 +59,7 @@ with tab7:
     st.plotly_chart(fig7, theme="streamlit", use_container_width=True)
 
 tab8.subheader("P2_B365")
-fig8=px.box(nums,x='P1Rank')
+fig8=px.box(nums,x='P2_B365')
 with tab8:
     st.plotly_chart(fig8, theme="streamlit", use_container_width=True)
 
