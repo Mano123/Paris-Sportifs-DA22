@@ -113,6 +113,11 @@ st.write(fig)
 st.subheader('SIMULATION')
 
 capital_depart = st.number_input('Capital de départ')
+saison=['2019']
+
+saison_value = st.selectbox("Saison", saison)
+
+st.write(saison_value,'_clean.xlsx')
 
 uploaded_file = st.file_uploader("Choisir un fichier")
 if uploaded_file is not None:
