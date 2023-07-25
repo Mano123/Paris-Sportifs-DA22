@@ -117,8 +117,6 @@ saison=['2019']
 
 saison_value = st.selectbox("Saison", saison)
 
-st.write(saison_value+'_clean.xlsx')
-
 df_test=pd.read_excel(saison_value+'_clean.xlsx')
 
 # Encodage variable numérique
@@ -142,20 +140,17 @@ y_pred=forest.predict(df_test_scaled)
 df_pred=pd.concat([df_test,pd.Series(y_pred),pd.DataFrame(y_pred_proba,columns=['Proba 0','Proba 1'])['Proba 0'],pd.DataFrame(y_pred_proba,columns=['Proba 0','Proba 1'])['Proba 1']],axis=1)
 df_pred=df_pred.rename(columns={0:'Result',1:'Proba 0',2:'Proba 1'})
 
-#test=[]
-
 modification_container = st.container()
 
 with modification_container:
-    location = st.selectbox("Location", sorted(df_pred.Location.unique()))
+    location = st.selectbox("Ville", sorted(df_pred.Location.unique()))
     date = st.selectbox("Date",pd.to_datetime(df_pred.Date[df_pred.Location==location]).unique())
-    tournament = st.selectbox("Tournament", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Tournament.unique()))
-    serie = st.selectbox("Series", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Series.unique()))
+    tournament = st.selectbox("Tournoi", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Tournament.unique()))
+    serie = st.selectbox("Catégorie de tournoi", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Series.unique()))
     round = st.selectbox("Round", df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Round.unique())
-    player1 = st.selectbox("Player 1", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date) & (df_pred.Round==round)].Player1.unique()))
-    player2 = st.selectbox("Player 2", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date) & (df_pred.Round==round) & (df_pred.Player1==player1)].Player2.unique()))
-            
-                
+    player1 = st.selectbox("Joueur 1", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date) & (df_pred.Round==round)].Player1.unique()))
+    player2 = st.selectbox("Joueur 2", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date) & (df_pred.Round==round) & (df_pred.Player1==player1)].Player2.unique()))
+           
     df_filtre=df_pred[(df_pred.Location==location) & (df_pred.Tournament==tournament) & (df_pred.Series==serie) & (df_pred.Round==round) & (df_pred.Player1==player1) & (df_pred.Player2==player2)]    
     
     if st.button('FAITES VOTRE PARIS'):
