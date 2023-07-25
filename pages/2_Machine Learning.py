@@ -119,76 +119,74 @@ saison_value = st.selectbox("Saison", saison)
 
 st.write(saison_value+'_clean.xlsx')
 
-uploaded_file = st.file_uploader("Choisir un fichier")
-if uploaded_file is not None:
-    df_test=pd.read_excel(uploaded_file)
+df_test=pd.read_excel(saison_value+'_clean.xlsx')
 
-    # Encodage variable numérique
+# Encodage variable numérique
 
-    feats_scaled=pd.DataFrame(scaler.fit_transform(feats.drop(['Location','Tournament','Series','Court','Surface','Round','Player1','Player2','Cat_Player1','Cat_Player2'],axis=1)),columns=feats.drop(['Location','Tournament','Series','Court','Surface','Round','Player1','Player2','Cat_Player1','Cat_Player2'],axis=1).columns)
-    df_test_scaled=pd.DataFrame(scaler.transform(df_test.drop(['Date','Location','Tournament','Series','Court','Surface','Round','Player1','Player2'],axis=1)),columns=df_test.drop(['Date','Location','Tournament','Series','Court','Surface','Round','Player1','Player2'],axis=1).columns)
+feats_scaled=pd.DataFrame(scaler.fit_transform(feats.drop(['Location','Tournament','Series','Court','Surface','Round','Player1','Player2','Cat_Player1','Cat_Player2'],axis=1)),columns=feats.drop(['Location','Tournament','Series','Court','Surface','Round','Player1','Player2','Cat_Player1','Cat_Player2'],axis=1).columns)
+df_test_scaled=pd.DataFrame(scaler.transform(df_test.drop(['Date','Location','Tournament','Series','Court','Surface','Round','Player1','Player2'],axis=1)),columns=df_test.drop(['Date','Location','Tournament','Series','Court','Surface','Round','Player1','Player2'],axis=1).columns)
 
-    # Forêt aléatoire
+# Forêt aléatoire
     
-    from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
     
-    forest=RandomForestClassifier(n_estimators=1000,max_depth=4,n_jobs=-1,random_state=0)
-    forest.fit(feats_scaled,target)
+forest=RandomForestClassifier(n_estimators=1000,max_depth=4,n_jobs=-1,random_state=0)
+forest.fit(feats_scaled,target)
 
-    # Prediction de la variable cible du jeu de données de la saison 2019
+# Prediction de la variable cible du jeu de données de la saison 2019
 
-    y_pred_proba=forest.predict_proba(df_test_scaled)
-    y_pred=forest.predict(df_test_scaled)
+y_pred_proba=forest.predict_proba(df_test_scaled)
+y_pred=forest.predict(df_test_scaled)
 
-    # Construction Dataframe des données prédites
-    df_pred=pd.concat([df_test,pd.Series(y_pred),pd.DataFrame(y_pred_proba,columns=['Proba 0','Proba 1'])['Proba 0'],pd.DataFrame(y_pred_proba,columns=['Proba 0','Proba 1'])['Proba 1']],axis=1)
-    df_pred=df_pred.rename(columns={0:'Result',1:'Proba 0',2:'Proba 1'})
+# Construction Dataframe des données prédites
+df_pred=pd.concat([df_test,pd.Series(y_pred),pd.DataFrame(y_pred_proba,columns=['Proba 0','Proba 1'])['Proba 0'],pd.DataFrame(y_pred_proba,columns=['Proba 0','Proba 1'])['Proba 1']],axis=1)
+df_pred=df_pred.rename(columns={0:'Result',1:'Proba 0',2:'Proba 1'})
 
-    test=[]
+#test=[]
 
-    modification_container = st.container()
+modification_container = st.container()
 
-    with modification_container:
-        location = st.selectbox("Location", sorted(df_pred.Location.unique()))
-        date = st.selectbox("Date",pd.to_datetime(df_pred.Date[df_pred.Location==location]).unique())
-        tournament = st.selectbox("Tournament", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Tournament.unique()))
-        serie = st.selectbox("Series", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Series.unique()))
-        round = st.selectbox("Round", df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Round.unique())
-        player1 = st.selectbox("Player 1", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date) & (df_pred.Round==round)].Player1.unique()))
-        player2 = st.selectbox("Player 2", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date) & (df_pred.Round==round) & (df_pred.Player1==player1)].Player2.unique()))
+with modification_container:
+    location = st.selectbox("Location", sorted(df_pred.Location.unique()))
+    date = st.selectbox("Date",pd.to_datetime(df_pred.Date[df_pred.Location==location]).unique())
+    tournament = st.selectbox("Tournament", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Tournament.unique()))
+    serie = st.selectbox("Series", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Series.unique()))
+    round = st.selectbox("Round", df_pred[(df_pred.Location==location) & (df_pred.Date==date)].Round.unique())
+    player1 = st.selectbox("Player 1", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date) & (df_pred.Round==round)].Player1.unique()))
+    player2 = st.selectbox("Player 2", sorted(df_pred[(df_pred.Location==location) & (df_pred.Date==date) & (df_pred.Round==round) & (df_pred.Player1==player1)].Player2.unique()))
             
                 
-        df_filtre=df_pred[(df_pred.Location==location) & (df_pred.Tournament==tournament) & (df_pred.Series==serie) & (df_pred.Round==round) & (df_pred.Player1==player1) & (df_pred.Player2==player2)]    
+    df_filtre=df_pred[(df_pred.Location==location) & (df_pred.Tournament==tournament) & (df_pred.Series==serie) & (df_pred.Round==round) & (df_pred.Player1==player1) & (df_pred.Player2==player2)]    
     
-        if st.button('FAITES VOTRE PARIS'):
-            st.write('Tournoi de ',tournament)
-            st.write('Date du tournoi : ',date.strftime('%d-%m-%Y'))
-            st.write('Joueur 1 : ',player1)
-            st.write('Probabilité que le Joueur 1 gagne : {0:.2f}'.format(df_filtre['Proba 1'].values[0]*100),' %')
-            st.write('Joueur 2 : ',player2)
-            st.write('Probabilité que le Joueur 2 gagne : {0:.2f}'.format(df_filtre['Proba 0'].values[0]*100),' %')
-            st.write('Niveau du Tournoi : '+round)
+    if st.button('FAITES VOTRE PARIS'):
+        st.write('Tournoi de ',tournament)
+        st.write('Date du tournoi : ',date.strftime('%d-%m-%Y'))
+        st.write('Joueur 1 : ',player1)
+        st.write('Probabilité que le Joueur 1 gagne : {0:.2f}'.format(df_filtre['Proba 1'].values[0]*100),' %')
+        st.write('Joueur 2 : ',player2)
+        st.write('Probabilité que le Joueur 2 gagne : {0:.2f}'.format(df_filtre['Proba 0'].values[0]*100),' %')
+        st.write('Niveau du Tournoi : '+round)
         
-            #ecart=np.abs((df_filtre['Proba 1'].values[0]*100)-(df_filtre['Proba 0'].values[0]*100))
+        #ecart=np.abs((df_filtre['Proba 1'].values[0]*100)-(df_filtre['Proba 0'].values[0]*100))
                 
-            gain=0
-            gains=[]
-            capital_actuel=capital_depart+gain
+        gain=0
+        gains=[]
+        capital_actuel=capital_depart+gain
         
-            if df_filtre.Result.values==1 and df_filtre['Proba 1'].values[0]>0.7:
-                mise=capital_actuel*(1-df_filtre['Proba 1'].values[0])
-                gain=mise*(df_filtre['P1_PS'].values[0]-1)
-                st.write('Le joueur ',player1,' a plus de chance de gagner ce match par rapport au joueur ',player2)
-                st.write('Miser {0:.2f}'.format(mise),' euros sur le joueur ',player1,' pour gagner {0:.2f}'.format(gain),' euros')
-            elif df_filtre.Result.values==1 and df_filtre['Proba 1'].values[0]<0.7:
-                mise=capital_actuel*(1-df_filtre['Proba 1'].values[0])
-                gain=mise*(df_filtre['P1_PS'].values[0]-1)
-                st.write("Ce paris est trop risqué, mais vous pouvez si vous le souhaitez miser {0:.2f} euros sur le joueur ".format(mise),player1," pour envisager un gain de {0:.2f} euros".format(gain))
-            elif df_filtre.Result.values==0 and df_filtre['Proba 0'].values[0]>0.7:
-                mise=capital_actuel*(1-df_filtre['Proba 0'].values[0])
-                gain=mise*(df_filtre['P2_PS'].values[0]-1)
-                st.write('Le joueur '+player2+' a plus de chance de gagner ce match par rapport au joueur '+player1+'\n'+'Miser '+str(mise)+' euros sur le joueur '+player2+' pour gagner '+str(gain)+' euros')
-            elif df_filtre.Result.values==0 and df_filtre['Proba 0'].values[0]<0.7:
-                mise=capital_actuel*(1-df_filtre['Proba 0'].values[0])
-                gain=mise*(df_filtre['P2_PS'].values[0]-1)
-                st.write("Ce paris est trop risqué, mais vous pouvez si vous le souhaitez miser {0:.2f} euros sur le joueur ".format(mise),player2," pour envisager un gain de {0:.2f} euros".format(gain))
+        if df_filtre.Result.values==1 and df_filtre['Proba 1'].values[0]>0.7:
+            mise=capital_actuel*(1-df_filtre['Proba 1'].values[0])
+            gain=mise*(df_filtre['P1_PS'].values[0]-1)
+            st.write('Le joueur ',player1,' a plus de chance de gagner ce match par rapport au joueur ',player2)
+            st.write('Miser {0:.2f}'.format(mise),' euros sur le joueur ',player1,' pour gagner {0:.2f}'.format(gain),' euros')
+        elif df_filtre.Result.values==1 and df_filtre['Proba 1'].values[0]<0.7:
+            mise=capital_actuel*(1-df_filtre['Proba 1'].values[0])
+            gain=mise*(df_filtre['P1_PS'].values[0]-1)
+            st.write("Ce paris est trop risqué, mais vous pouvez si vous le souhaitez miser {0:.2f} euros sur le joueur ".format(mise),player1," pour envisager un gain de {0:.2f} euros".format(gain))
+        elif df_filtre.Result.values==0 and df_filtre['Proba 0'].values[0]>0.7:
+            mise=capital_actuel*(1-df_filtre['Proba 0'].values[0])
+            gain=mise*(df_filtre['P2_PS'].values[0]-1)
+            st.write('Le joueur '+player2+' a plus de chance de gagner ce match par rapport au joueur '+player1+'\n'+'Miser '+str(mise)+' euros sur le joueur '+player2+' pour gagner '+str(gain)+' euros')
+        elif df_filtre.Result.values==0 and df_filtre['Proba 0'].values[0]<0.7:
+            mise=capital_actuel*(1-df_filtre['Proba 0'].values[0])
+            gain=mise*(df_filtre['P2_PS'].values[0]-1)
+            st.write("Ce paris est trop risqué, mais vous pouvez si vous le souhaitez miser {0:.2f} euros sur le joueur ".format(mise),player2," pour envisager un gain de {0:.2f} euros".format(gain))
