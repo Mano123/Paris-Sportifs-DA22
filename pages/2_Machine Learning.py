@@ -177,11 +177,11 @@ with modification_container:
             mise=capital_actuel*(1-df_filtre['Proba 1'].values[0])
             gain=mise*(df_filtre['P1_PS'].values[0]-1)
             st.write("Ce paris est trop risqué, il vaut mieut s'en abstenir")
-        elif df_filtre.Result.values==0 and (df_filtre['P1_PS'].values[0]<=1.42 or df_filtre['P1_B365'].values[0]<=1.38):
+        elif df_filtre.Result.values==0 and (df_filtre['P2_PS'].values[0]<=1.42 or df_filtre['P2_B365'].values[0]<=1.38):
             mise=capital_actuel*(1-df_filtre['Proba 0'].values[0])
             gain=mise*(df_filtre['P2_PS'].values[0]-1)
             st.write('Le joueur '+player2+' a plus de chance de gagner ce match par rapport au joueur '+player1+'\n'+'Miser '+str(mise)+' euros sur le joueur '+player2+' pour gagner '+str(gain)+' euros')
-        elif df_filtre.Result.values==0 and (df_filtre['P1_PS'].values[0]>1.42 or df_filtre['P1_B365'].values[0]>1.38):
+        elif df_filtre.Result.values==0 and (df_filtre['P2_PS'].values[0]>1.42 or df_filtre['P2_B365'].values[0]>1.38):
             mise=capital_actuel*(1-df_filtre['Proba 0'].values[0])
             gain=mise*(df_filtre['P2_PS'].values[0]-1)
             st.write("Ce paris est trop risqué, il vaut mieut s'en abstenir")
