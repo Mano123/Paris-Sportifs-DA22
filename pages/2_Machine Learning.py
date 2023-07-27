@@ -140,6 +140,20 @@ y_pred=forest.predict(df_test_scaled)
 df_pred=pd.concat([df_test,pd.Series(y_pred),pd.DataFrame(y_pred_proba,columns=['Proba 0','Proba 1'])['Proba 0'],pd.DataFrame(y_pred_proba,columns=['Proba 0','Proba 1'])['Proba 1']],axis=1)
 df_pred=df_pred.rename(columns={0:'Result',1:'Proba 0',2:'Proba 1'})
 
+if df_pred.loc[row,'Result']=0:
+    var_inter=df_pred.loc[row,'Player1']
+    df_pred.loc[row,'Player1']=df_pred.loc[row,'Player2']
+    df_pred.loc[row,'Player2']=var_inter
+    var_inter=df_pred.loc[row,'P1Rank']
+    df_pred.loc[row,'P1Rank']=df_pred.loc[row,'P2Rank']
+    df_pred.loc[row,'P2Rank']=var_inter
+    var_inter=df_pred.loc[row,'P1_PS']
+    df_pred.loc[row,'P1_PS']=df_pred.loc[row,'P2_PS']
+    df_pred.loc[row,'P2_PS']=var_inter
+    var_inter=df_pred.loc[row,'P1_B365']
+    df_pred.loc[row,'P1_B365']=df_pred.loc[row,'P2_B365']
+    df_pred.loc[row,'P2_B365']=var_inter
+
 modification_container = st.container()
 
 with modification_container:
@@ -161,8 +175,6 @@ with modification_container:
         st.write('Joueur 2 : ',player2)
         st.write('Probabilité que le Joueur 2 gagne : {0:.2f}'.format(df_filtre['Proba 0'].values[0]*100),' %')
         st.write('Niveau du Tournoi : '+round)
-        
-        #ecart=np.abs((df_filtre['Proba 1'].values[0]*100)-(df_filtre['Proba 0'].values[0]*100))
                 
         gain=0
         gains=[]
