@@ -168,20 +168,20 @@ with modification_container:
         gains=[]
         capital_actuel=capital_depart+gain
         
-        if df_filtre.Result.values==1 and df_filtre['Proba 1'].values[0]>0.7:
+        if df_filtre.Result.values==1 and (df_filtre['P1Rank'].values[0]<=24 and df_filtre['P1_PS'].values[0]<=1.42 and df_filtre['P1_B365'].values[0]<=1.38):
             mise=capital_actuel*(1-df_filtre['Proba 1'].values[0])
             gain=mise*(df_filtre['P1_PS'].values[0]-1)
             st.write('Le joueur ',player1,' a plus de chance de gagner ce match par rapport au joueur ',player2)
             st.write('Miser {0:.2f}'.format(mise),' euros sur le joueur ',player1,' pour gagner {0:.2f}'.format(gain),' euros')
-        elif df_filtre.Result.values==1 and df_filtre['Proba 1'].values[0]<0.7:
+        elif df_filtre.Result.values==1 and (df_filtre['P1Rank'].values[0]>24 or df_filtre['P1_PS'].values[0]>1.42 or df_filtre['P1_B365'].values[0]>1.38):
             mise=capital_actuel*(1-df_filtre['Proba 1'].values[0])
             gain=mise*(df_filtre['P1_PS'].values[0]-1)
-            st.write("Ce paris est trop risqué, mais vous pouvez si vous le souhaitez miser {0:.2f} euros sur le joueur ".format(mise),player1," pour envisager un gain de {0:.2f} euros".format(gain))
-        elif df_filtre.Result.values==0 and df_filtre['Proba 0'].values[0]>0.7:
+            st.write("Ce paris est trop risqué, il vaut mieut s'en abstenir")
+        elif df_filtre.Result.values==0 and (df_filtre['P1Rank'].values[0]<=24 and df_filtre['P1_PS'].values[0]<=1.42 and df_filtre['P1_B365'].values[0]<=1.38):
             mise=capital_actuel*(1-df_filtre['Proba 0'].values[0])
             gain=mise*(df_filtre['P2_PS'].values[0]-1)
             st.write('Le joueur '+player2+' a plus de chance de gagner ce match par rapport au joueur '+player1+'\n'+'Miser '+str(mise)+' euros sur le joueur '+player2+' pour gagner '+str(gain)+' euros')
-        elif df_filtre.Result.values==0 and df_filtre['Proba 0'].values[0]<0.7:
+        elif df_filtre.Result.values==0 and (df_filtre['P1Rank'].values[0]>24 or df_filtre['P1_PS'].values[0]>1.42 or df_filtre['P1_B365'].values[0]>1.38):
             mise=capital_actuel*(1-df_filtre['Proba 0'].values[0])
             gain=mise*(df_filtre['P2_PS'].values[0]-1)
-            st.write("Ce paris est trop risqué, mais vous pouvez si vous le souhaitez miser {0:.2f} euros sur le joueur ".format(mise),player2," pour envisager un gain de {0:.2f} euros".format(gain))
+            st.write("Ce paris est trop risqué, il vaut mieut s'en abstenir")
