@@ -177,7 +177,7 @@ with modification_container:
         elif df_filtre.Result.values==1 and ((ratio_ps>0.466019 and ratio_ps<1) or (ratio_b365>0.473868 and ratio_b365<1)):
             mise=capital_actuel*(1-df_filtre['Proba 1'].values[0])
             gain=mise*(df_filtre['P1_PS'].values[0]-1)
-            st.write("Ce paris est trop risqué, il vaut mieut s'en abstenir")
+            st.write("Ce paris est trop risqué, mais vous pouvez miser {0:.2f}".format(mise),"sur le joueur ",player1," pour gagner {0:.2f}".format(gain)," euros")
         elif df_filtre.Result.values==0 and (ratio_ps>=2.132867 or ratio_b365>=2.107771):
             mise=capital_actuel*(1-df_filtre['Proba 0'].values[0])
             gain=mise*(df_filtre['P2_PS'].values[0]-1)
@@ -185,4 +185,4 @@ with modification_container:
         elif df_filtre.Result.values==0 and ((ratio_ps>1 and ratio_ps<2.132867) or (ratio_b365>1 and ratio_b365<2.107771)):
             mise=capital_actuel*(1-df_filtre['Proba 0'].values[0])
             gain=mise*(df_filtre['P2_PS'].values[0]-1)
-            st.write("Ce paris est trop risqué, il vaut mieut s'en abstenir")
+            st.write("Ce paris est trop risqué, mais vous pouvez miser {0:.2f}".format(mise),"sur le joueur ",player2," pour gagner {0:.2f}".format(gain)," euros")
