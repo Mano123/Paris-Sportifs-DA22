@@ -139,12 +139,6 @@ y_pred=forest.predict(df_test_scaled)
 # Construction Dataframe des données prédites
 df_pred=pd.concat([df_test,pd.Series(y_pred),pd.DataFrame(y_pred_proba,columns=['Proba 0','Proba 1'])['Proba 0'],pd.DataFrame(y_pred_proba,columns=['Proba 0','Proba 1'])['Proba 1']],axis=1)
 df_pred=df_pred.rename(columns={0:'Result',1:'Proba 0',2:'Proba 1'})
-
-for row in df_pred.index:
-    if df_pred.loc[row,'Result']==0:
-        var_inter=df_pred.loc[row,'Player1']
-        df_pred.loc[row,'Player1']=df_pred.loc[row,'Player2']
-        df_pred.loc[row,'Player2']=var_inter
         
 
 modification_container = st.container()
