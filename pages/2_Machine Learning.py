@@ -87,7 +87,7 @@ forest.fit(X_train_scaled,y_train)
 
 # RESUME DES PERFORMANCES DES MODELES
 
-st.subheader('Tableau Recapitulatif Des Scores Par Modèles')
+st.subheader('Tableau Recapitulatif Des Scores Par Modèles', divider='green')
 
 performance=pd.DataFrame(
     {
@@ -100,7 +100,7 @@ st.markdown('Les résualts du tableau récaptitulatif des scores par modèles no
 
 # Importance des variables du dataset
 
-st.subheader('TOP 5 des Critères de Performances Du Modèle Forêt Aléatoire')
+st.subheader('TOP 5 des Critères de Performances Du Modèle Forêt Aléatoire', divider='green')
 
 dataset_importance=pd.DataFrame({
     'Feature Name':forest.feature_names_in_,
@@ -109,6 +109,12 @@ dataset_importance=pd.DataFrame({
 
 fig=px.bar(dataset_importance,x='Feature importance',y='Feature Name',orientation='h')
 st.write(fig)
+st.write("Le TOP 5 des critères de selection des variables ayant le plus d'influence sur le score final du modèle que les variables les importantes à considerer sont :")
+st.markdown("- P1_B365")
+st.markdown("- P1_PS")
+st.markdown("- P2_B365")
+st.markdown("- P1_PS")
+st.markdown("- P2_Rank")
 
 st.subheader('Simulation', divider='green')
 
