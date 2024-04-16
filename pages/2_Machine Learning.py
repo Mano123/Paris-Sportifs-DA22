@@ -105,7 +105,7 @@ st.subheader('Selection Des Critères De Performances Du Modèle Forêt Aléatoi
 dataset_importance=pd.DataFrame({
     'Feature Name':forest.feature_names_in_,
     'Feature importance':forest.feature_importances_
-}).sort_values(by='Feature importance',ascending=True).head(20).reset_index(drop=True)
+}).sort_values(by='Feature importance',ascending=False).head(5).reset_index(drop=True)
 
 fig=px.bar(dataset_importance,x='Feature importance',y='Feature Name',orientation='h')
 st.write(fig)
