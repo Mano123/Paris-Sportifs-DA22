@@ -117,6 +117,7 @@ st.markdown("- P1_PS")
 st.markdown("- P2_Rank")
 
 st.subheader('Simulation', divider='green')
+st.write("Dans cette partie nous allons effectuer un test de simulation de paris sur les matchs de la Saison 2019, ces données sont bien évidemment inconnu au modèle, l'utilsateur choisit donc les données du match sur lequel il souhaite parier et le modèle lui propose une stratégie à suivre pour effectuer son paris")
 
 capital_depart = st.number_input('Capital de départ')
 saison=['2019']
