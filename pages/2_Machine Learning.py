@@ -95,7 +95,7 @@ performance=pd.DataFrame(
         'Score Test':[reglog.score(X_test_scaled,y_test),dt.score(X_test_scaled,y_test),forest.score(X_test_scaled,y_test)]
     },index=['Modèle Linéaire','Arbre à décision','Forêt Aléatoire']
 )
-
+st.write(performance)
 st.markdown('Les résualts du tableau récaptitulatif des scores par modèles nous montrent très bien que le modèle de Machine Learning le plus promettteur pour résourdre le problème est le modèle **Forêt Aléatoire**')
 
 # Importance des variables du dataset
