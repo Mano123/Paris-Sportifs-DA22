@@ -9,4 +9,4 @@ import plotly.graph_objects as go
 
 st.title('Data Vizualisation')
 
-components.iframe("https://app.powerbi.com/view?r=eyJrIjoiM2M2YjAyZjAtZjAwNC00NTAxLWIyZWYtODM2MWQzNWE3ZTNiIiwidCI6IjZiM2JlZTZlLWYxMjEtNDJkNS05ZmYxLTllOTAwMGEyOWIxMSJ9",height=1000)
+components.iframe("https://app.powerbi.com/view?r=eyJrIjoiM2M2YjAyZjAtZjAwNC00NTAxLWIyZWYtODM2MWQzNWE3ZTNiIiwidCI6IjZiM2JlZTZlLWYxMjEtNDJkNS05ZmYxLTllOTAwMGEyOWIxMSJ9",height=1000,width=500)
