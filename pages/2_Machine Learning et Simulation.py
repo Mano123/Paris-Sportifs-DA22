@@ -12,7 +12,7 @@ from pandas.api.types import (
     is_object_dtype,
 )
 
-st.title('MACHINE LEARNING ET SIMULATION')
+st.header('MACHINE LEARNING ET SIMULATION',divider='green')
 
 # IMPLEMENTATION DU MODELE
 
