@@ -9,4 +9,4 @@ st.set_page_config(
     page_icon="",
 )
 
-st.write("BIENVENUE SUR LE SITE DE PARIS SPORTIFS")
+st.title("BIENVENUE SUR LE SITE DE PARIS SPORTIFS")
