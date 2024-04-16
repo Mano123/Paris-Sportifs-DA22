@@ -87,7 +87,7 @@ forest.fit(X_train_scaled,y_train)
 
 # RESUME DES PERFORMANCES DES MODELES
 
-st.subheader('TABLEAU RECAPITULATIF DES SCORES PAR MODELES')
+st.subheader('Tableau Recapitulatif Des Scores Par Modèles')
 
 performance=pd.DataFrame(
     {
@@ -100,7 +100,7 @@ st.write(performance)
 
 # Importance des variables du dataset
 
-st.subheader('SELECTION DES CRITERES DE PERFORMANCES DU MODELE FORÊT ALEATOIRE')
+st.subheader('Selection Des Critères De Performances Du Modèle Forêt Aléatoire')
 
 dataset_importance=pd.DataFrame({
     'Feature Name':forest.feature_names_in_,
@@ -110,7 +110,7 @@ dataset_importance=pd.DataFrame({
 fig=px.bar(dataset_importance,x='Feature importance',y='Feature Name',orientation='h')
 st.write(fig)
 
-st.subheader('SIMULATION')
+st.subheader('Simulation')
 
 capital_depart = st.number_input('Capital de départ')
 saison=['2019']
