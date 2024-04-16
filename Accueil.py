@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 st.set_page_config(
-    page_title="PROJET PARIS SPORTIFS",
+    page_title="Accueil",
     page_icon="",
 )
 
